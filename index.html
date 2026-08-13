@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmoni Relasi Pasangan & Dinamika Komunikasi Interpersonal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            teal: '#0F4C5C',
+                            coral: '#E36414',
+                            amber: '#FB8B24',
+                            crimson: '#9A031E',
+                            cream: '#FDFBF7',
+                            softgray: '#F1F5F9',
+                            dark: '#1E293B'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FDFBF7;
+            color: #1E293B;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 380px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(15, 76, 92, 0.08), 0 8px 10px -6px rgba(15, 76, 92, 0.04);
+        }
+        .tab-btn.active {
+            background-color: #0F4C5C;
+            color: #FFFFFF;
+            border-color: #0F4C5C;
+        }
+    </style>
+</head>
+<body class="antialiased pb-16">
+
+    <header class="bg-gradient-to-r from-[#0F4C5C] via-[#1D6375] to-[#E36414] text-white py-12 px-4 sm:px-8 shadow-lg">
+        <div class="max-w-6xl mx-auto text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="max-w-3xl">
+                <div class="inline-block bg-white/20 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-3">
+                    Analisis Empiris & Kerangka Gottman
+                </div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                    Harmoni Relasi Pasangan & Dinamika Komunikasi
+                </h1>
+                <p class="mt-3 text-base sm:text-lg text-slate-100 font-light leading-relaxed">
+                    Visualisasi komprehensif mengenai evolusi kepuasan pernikahan, strategi komunikasi berbasis bukti klinis, keseimbangan kekuasaan, dan navigasi norma sosio-kultural di Indonesia.
+                </p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/20 text-center min-w-[220px]">
+                <div class="text-3xl font-extrabold text-[#FB8B24]">5 : 1</div>
+                <div class="text-xs text-slate-100 font-medium mt-1">Rasio Minimal Interaksi Positif Saat Konflik</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 mt-8 space-y-12">
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white p-5 rounded-xl border border-slate-200 card-shadow text-center hover:border-[#E36414] transition-all">
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wide">Risiko Perceraian Gap >20 Thn</div>
+                <div class="text-3xl font-extrabold text-[#9A031E] my-2">~100%</div>
+                <p class="text-xs text-slate-600 leading-snug">Hampir 2x lipat dibanding pasangan usia sebaya.</p>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-slate-200 card-shadow text-center hover:border-[#E36414] transition-all">
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wide">Fase Kritis Kepuasan</div>
+                <div class="text-3xl font-extrabold text-[#E36414] my-2">Thn 6 - 10</div>
+                <p class="text-xs text-slate-600 leading-snug">Penurunan tajam kepuasan pada pasangan beda usia besar.</p>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-slate-200 card-shadow text-center hover:border-[#0F4C5C] transition-all">
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wide">Rasio Interaksi Harian</div>
+                <div class="text-3xl font-extrabold text-[#0F4C5C] my-2">20 : 1</div>
+                <p class="text-xs text-slate-600 leading-snug">Rasio deposit emosional positif harian yang sehat.</p>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-slate-200 card-shadow text-center hover:border-[#0F4C5C] transition-all">
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wide">Jeda Penenangan Diri</div>
+                <div class="text-3xl font-extrabold text-[#FB8B24] my-2">20 Menit</div>
+                <p class="text-xs text-slate-600 leading-snug">Waktu minimal meredakan luapan emosi fisiologis.</p>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 card-shadow space-y-6">
+            <div class="border-b border-slate-100 pb-4">
+                <span class="text-xs font-bold text-[#E36414] uppercase tracking-wider">Bagian 1</span>
+                <h2 class="text-2xl font-bold text-[#0F4C5C] mt-1">Dinamika Age-Sex Gap & Evolusi Kepuasan Pernikahan</h2>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                    Studi longitudinal menunjukkan bahwa selisih usia (age gap) awal memengaruhi stabilitas relasi, namun variabel prosesual seperti empati dan gaya komunikasi memegang peran kunci. Meskipun pasangan beda usia besar melaporkan kepuasan awal yang tinggi, mereka lebih rentan terhadap guncangan ekonomi dan ketidakselarasan fase kehidupan (life stage disparity).
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="space-y-3">
+                    <h3 class="text-lg font-bold text-slate-800 text-center lg:text-left">
+                        Proyeksi Peningkatan Risiko Perceraian Relatif
+                    </h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Data statistik menunjukkan peningkatan risiko perceraian yang berbanding lurus dengan besarnya selisih usia pasangan dibandingkan baseline pasangan sebaya.
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="divorceRiskChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <h3 class="text-lg font-bold text-slate-800 text-center lg:text-left">
+                        Trajektori Kepuasan Hubungan Sepanjang Masa Pernikahan
+                    </h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Pasangan dengan age gap besar mengalami penurunan kepuasan yang lebih curam pada tahun ke-6 hingga ke-10, terutama saat menghadapi krisis ekonomi atau kesehatan.
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="satisfactionTrajectoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 pt-4 border-t border-slate-100">
+                <div class="p-4 bg-[#FDFBF7] rounded-xl border border-slate-200">
+                    <div class="text-sm font-bold text-[#0F4C5C] mb-1">Pola Pria Lebih Tua (Global Baseline)</div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Pola rata-rata global adalah selisih 4 tahun dengan pria lebih tua. Pria memperoleh rasa aman reproduktif, namun rentan cemas akan kecukupan seksual & kesehatan fisik seiring penuaan.
+                    </p>
+                </div>
+                <div class="p-4 bg-[#FDFBF7] rounded-xl border border-slate-200">
+                    <div class="text-sm font-bold text-[#E36414] mb-1">Pola Wanita Lebih Tua (Reverse Age Gap)</div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Menunjukkan komitmen emosional dan kepuasan seksual perempuan yang tinggi, namun menghadapi tantangan risiko dinamika maternalistik dan tekanan stigma sosial yang lebih keras.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 card-shadow space-y-6">
+            <div class="border-b border-slate-100 pb-4">
+                <span class="text-xs font-bold text-[#E36414] uppercase tracking-wider">Bagian 2</span>
+                <h2 class="text-2xl font-bold text-[#0F4C5C] mt-1">Arsitektur Komunikasi Klinik: Kerangka Kerja Gottman</h2>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                    Dr. John Gottman mengidentifikasi 4 pola komunikasi destruktif (The Four Horsemen) yang menjadi prediktor utama keretakan hubungan. Untuk menjaga keharmonisan, setiap perilaku destruktif harus digantikan secara konsisten dengan penawar klinis (The Antidotes).
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+                <button onclick="switchHorseman('criticism')" id="tab-criticism" class="tab-btn active text-xs sm:text-sm font-bold py-2.5 px-3 rounded-lg border border-slate-200 transition-all">
+                    1. Criticism
+                </button>
+                <button onclick="switchHorseman('contempt')" id="tab-contempt" class="tab-btn text-xs sm:text-sm font-bold py-2.5 px-3 rounded-lg border border-slate-200 transition-all">
+                    2. Contempt
+                </button>
+                <button onclick="switchHorseman('defensiveness')" id="tab-defensiveness" class="tab-btn text-xs sm:text-sm font-bold py-2.5 px-3 rounded-lg border border-slate-200 transition-all">
+                    3. Defensiveness
+                </button>
+                <button onclick="switchHorseman('stonewalling')" id="tab-stonewalling" class="tab-btn text-xs sm:text-sm font-bold py-2.5 px-3 rounded-lg border border-slate-200 transition-all">
+                    4. Stonewalling
+                </button>
+            </div>
+
+            <div id="horseman-display" class="bg-[#FDFBF7] p-6 rounded-xl border border-slate-200 transition-all">
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-slate-100">
+                <h3 class="text-lg font-bold text-[#0F4C5C] mb-2">Simulasi Interaktif: Emotional Bank Account (Tabungan Emosional)</h3>
+                <p class="text-xs text-slate-600 mb-6 leading-relaxed">
+                    Setiap interaksi positif merupakan setoran (deposit), sedangkan kritik/penghinaan adalah penarikan (withdrawal). Atur slider di bawah untuk melihat dampak rasio interaksi terhadap tingkat kesehatan relasi Anda.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                    <div class="space-y-4 md:col-span-2 bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-1">
+                                <span>Setoran Positif (Pujian, Sentuhan, Apresiasi)</span>
+                                <span id="positive-val" class="text-[#0F4C5C]">15</span>
+                            </div>
+                            <input type="range" id="positive-range" min="1" max="30" value="15" class="w-full accent-[#0F4C5C]" oninput="updateBankSimulator()">
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-1">
+                                <span>Penarikan Negatif (Kritik, Defensif, Konflik)</span>
+                                <span id="negative-val" class="text-[#9A031E]">2</span>
+                            </div>
+                            <input type="range" id="negative-range" min="1" max="10" value="2" class="w-full accent-[#9A031E]" oninput="updateBankSimulator()">
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 text-center space-y-2 card-shadow">
+                        <div class="text-xs font-bold text-slate-400 uppercase">Rasio Aktual Anda</div>
+                        <div id="ratio-result" class="text-3xl font-extrabold text-[#0F4C5C]">7.5 : 1</div>
+                        <div id="ratio-status" class="text-xs font-bold px-3 py-1 rounded-full inline-block bg-emerald-100 text-emerald-800">
+                            Sangat Sehat (Memenuhi Syarat Konflik)
+                        </div>
+                        <p id="ratio-desc" class="text-[11px] text-slate-500 leading-tight">
+                            Rasio di atas 5:1 memberikan perlindungan memadai saat terjadi perbedaan pendapat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 card-shadow space-y-6">
+            <div class="border-b border-slate-100 pb-4">
+                <span class="text-xs font-bold text-[#E36414] uppercase tracking-wider">Bagian 3</span>
+                <h2 class="text-2xl font-bold text-[#0F4C5C] mt-1">Protokol 5 Langkah Reflective Listening & Regulasi Fisiologis</h2>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                    Secara neurobiologis, mendengar reflektif menekan respons amigdala (fight-or-flight) dan mengaktifkan Korteks Prefrontal untuk berpikir rasional. Ikuti langkah terstruktur ini saat mengurai perbedaan pendapat.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-3 relative">
+                <div class="bg-[#FDFBF7] p-4 rounded-xl border border-slate-200 space-y-2 flex flex-col justify-between">
+                    <div>
+                        <div class="w-7 h-7 rounded-full bg-[#0F4C5C] text-white font-extrabold text-xs flex items-center justify-center mb-2">1</div>
+                        <div class="font-bold text-xs text-[#0F4C5C]">Ruang Tanpa Distraksi</div>
+                        <p class="text-[11px] text-slate-600 mt-1 leading-snug">Menyingkirkan gadget dan gangguan fisik sebelum dialog dimulai.</p>
+                    </div>
+                </div>
+                <div class="bg-[#FDFBF7] p-4 rounded-xl border border-slate-200 space-y-2 flex flex-col justify-between">
+                    <div>
+                        <div class="w-7 h-7 rounded-full bg-[#0F4C5C] text-white font-extrabold text-xs flex items-center justify-center mb-2">2</div>
+                        <div class="font-bold text-xs text-[#0F4C5C]">Atensi Penuh</div>
+                        <p class="text-[11px] text-slate-600 mt-1 leading-snug">Mendengarkan tanpa interupsi atau menyiapkan kalimat sanggahan.</p>
+                    </div>
+                </div>
+                <div class="bg-[#FDFBF7] p-4 rounded-xl border border-slate-200 space-y-2 flex flex-col justify-between">
+                    <div>
+                        <div class="w-7 h-7 rounded-full bg-[#0F4C5C] text-white font-extrabold text-xs flex items-center justify-center mb-2">3</div>
+                        <div class="font-bold text-xs text-[#0F4C5C]">Parafrase Reflektif</div>
+                        <p class="text-[11px] text-slate-600 mt-1 leading-snug">Mengulang inti pesan: "Yang aku tangkap, kamu merasa..."</p>
+                    </div>
+                </div>
+                <div class="bg-[#FDFBF7] p-4 rounded-xl border border-slate-200 space-y-2 flex flex-col justify-between">
+                    <div>
+                        <div class="w-7 h-7 rounded-full bg-[#0F4C5C] text-white font-extrabold text-xs flex items-center justify-center mb-2">4</div>
+                        <div class="font-bold text-xs text-[#0F4C5C]">Validasi Emosional</div>
+                        <p class="text-[11px] text-slate-600 mt-1 leading-snug">Mengakui keabsahan perasaan tanpa harus menyetujui seluruh opini.</p>
+                    </div>
+                </div>
+                <div class="bg-[#FDFBF7] p-4 rounded-xl border border-slate-200 space-y-2 flex flex-col justify-between">
+                    <div>
+                        <div class="w-7 h-7 rounded-full bg-[#0F4C5C] text-white font-extrabold text-xs flex items-center justify-center mb-2">5</div>
+                        <div class="font-bold text-xs text-[#0F4C5C]">Klarifikasi Terbuka</div>
+                        <p class="text-[11px] text-slate-600 mt-1 leading-snug">Mengajukan pertanyaan eksploratif guna mengonfirmasi pemahaman.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 card-shadow space-y-6">
+            <div class="border-b border-slate-100 pb-4">
+                <span class="text-xs font-bold text-[#E36414] uppercase tracking-wider">Bagian 4</span>
+                <h2 class="text-2xl font-bold text-[#0F4C5C] mt-1">Keseimbangan Kekuasaan & Transparansi Finansial Berbasis Ekuitas</h2>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                    Ketimpangan usia atau pendapatan berisiko memicu pola paternalistik/maternalistik yang merusak otonomi individu, terutama bila salah satu pihak di bawah usia 25 tahun (fase kematangan korteks prefrontal). Pengelolaan keuangan berbasis proporsi persentase membantu menjaga kesetaraan hak.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div class="bg-[#FDFBF7] p-6 rounded-xl border border-slate-200 space-y-4">
+                    <h3 class="text-base font-bold text-[#0F4C5C]">Kalkulator Alokasi Finansial Proporsional</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Masukkan estimasi pendapatan bulanan kedua pihak untuk menghitung kontribusi rumah tangga secara proporsional dan penetapan dana otonom pribadi.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="text-[11px] font-bold text-slate-500">Pendapatan Pasangan A (Rp)</label>
+                            <input type="number" id="income-a" value="15000000" class="w-full p-2 mt-1 border border-slate-300 rounded-lg text-xs font-bold" oninput="calculateBudget()">
+                        </div>
+                        <div>
+                            <label class="text-[11px] font-bold text-slate-500">Pendapatan Pasangan B (Rp)</label>
+                            <input type="number" id="income-b" value="5000000" class="w-full p-2 mt-1 border border-slate-300 rounded-lg text-xs font-bold" oninput="calculateBudget()">
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-200 space-y-2">
+                        <div class="flex justify-between text-xs font-medium">
+                            <span>Total Pendapatan Gabungan:</span>
+                            <span id="total-income" class="font-bold text-slate-800">Rp 20.000.000</span>
+                        </div>
+                        <div class="flex justify-between text-xs font-medium">
+                            <span>Beban Rumah Tangga (Estimasi 60%):</span>
+                            <span id="household-expense" class="font-bold text-slate-800">Rp 12.000.000</span>
+                        </div>
+                        <div class="p-3 bg-white rounded-lg border border-slate-200 space-y-1 text-xs">
+                            <div class="flex justify-between">
+                                <span>Kontribusi Pasangan A (75%):</span>
+                                <span id="contrib-a" class="font-bold text-[#0F4C5C]">Rp 9.000.000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Kontribusi Pasangan B (25%):</span>
+                                <span id="contrib-b" class="font-bold text-[#E36414]">Rp 3.000.000</span>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-500 italic mt-1 leading-snug">
+                            *Dengan sistem ini, kedua pihak berkontribusi dengan beban persentase yang sama terhadap kapasitas finansial masing-masing, menjaga rasa adil dan menghormati dana otonomi pribadi.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-base font-bold text-slate-800">Prinsip Otonomi & Institusionalisasi "Planning Talks"</h3>
+                    
+                    <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-2">
+                        <div class="text-xs font-bold text-[#0F4C5C]">1. Penjagaan Hak Veto & Otonomi Identitas</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Pasangan yang lebih muda atau memiliki pendapatan lebih rendah wajib mempertahankan ruang keputusan pribadi, jejaring pertemanan mandiri, serta pengembangan pendidikan/karier tanpa kendali absolut pasangan.
+                        </p>
+                    </div>
+
+                    <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-2">
+                        <div class="text-xs font-bold text-[#0F4C5C]">2. Institutionalized Planning Talks (Berkala)</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Penyelenggaraan diskusi strategis berkala (triwulanan/tahunan) untuk menyelaraskan peta jalan (*roadmap*) relasi, investasi, proyeksi anak, hingga rencana pensiun guna menyinergikan horizon waktu yang berbeda.
+                        </p>
+                    </div>
+
+                    <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-2">
+                        <div class="text-xs font-bold text-[#0F4C5C]">3. Pengelolaan Transisi Perkembangan Otak (<25 Tahun)</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Menyadari proses maturasi korteks prefrontal pada pasangan muda sehingga proses pengambilan keputusan strategis dilakukan melalui dialog pembimbingan yang setara, bukan arahan instruktif satu arah.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 card-shadow space-y-6">
+            <div class="border-b border-slate-100 pb-4">
+                <span class="text-xs font-bold text-[#E36414] uppercase tracking-wider">Bagian 5</span>
+                <h2 class="text-2xl font-bold text-[#0F4C5C] mt-1">Adaptasi Keintiman Fisik & Navigasi Stigma Sosio-Kultural</h2>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                    Perubahan fisik akibat penuaan serta tekanan norma sosial dalam masyarakat kolektif seperti Indonesia memerlukan strategi penyesuaian ekspektasi internal dan pembatasan pengaruh eksternal.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-5 bg-[#FDFBF7] rounded-xl border border-slate-200 space-y-3">
+                    <h3 class="text-sm font-bold text-[#0F4C5C] uppercase tracking-wider">Adaptasi Seksualitas & Penuaan</h3>
+                    <ul class="space-y-2 text-xs text-slate-600 leading-relaxed">
+                        <li class="flex items-start gap-2">
+                            <span class="text-[#E36414] font-bold">•</span>
+                            <span><strong>Dekonstruksi Keintiman:</strong> Memperluas definisi intimasi dari sekadar koitus/genital menjadi keintiman holistik (sentuhan non-seksual, kehangatan emosional, dan kedekatan spiritual).</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-[#E36414] font-bold">•</span>
+                            <span><strong>Komunikasi Eksplisit Tanpa Stigma:</strong> Mendorong dialog terbuka mengenai fluktuasi libido, kecemasan performa, dan penurunan ketahanan fisik tanpa rasa malu.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-[#E36414] font-bold">•</span>
+                            <span><strong>Pengelolaan Ekspektasi:</strong> Memposisikan aktivitas intim sebagai sumber relaksasi bersama, bukan sebagai ajang pembuktian performa.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="p-5 bg-[#FDFBF7] rounded-xl border border-slate-200 space-y-3">
+                    <h3 class="text-sm font-bold text-[#0F4C5C] uppercase tracking-wider">Navigasi Stigma Indonesia</h3>
+                    <ul class="space-y-2 text-xs text-slate-600 leading-relaxed">
+                        <li class="flex items-start gap-2">
+                            <span class="text-[#0F4C5C] font-bold">•</span>
+                            <span><strong>Boundary Setting Tekstual:</strong> Membangun batas yang tegas terhadap intervensi keluarga besar atau cemoohan masyarakat mengenai stereotip age gap.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-[#0F4C5C] font-bold">•</span>
+                            <span><strong>Internal Validation Focus:</strong> Mengalihkan standar kebahagiaan dari penilaian sosial eksternal menuju mutu interaksi internal dan rasa aman pasangan.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-[#0F4C5C] font-bold">•</span>
+                            <span><strong>Dukungan Selektif:</strong> Memilih jejaring komunitas yang inklusif serta memanfaatkan konseling profesional jika tekanan stigma mengganggu kesehatan mental.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-6xl mx-auto px-4 sm:px-6 mt-12 text-center text-xs text-slate-400 space-y-2">
+        <p>Disintesis dari Riset Empiris Age-Gap Dynamics, Kerangka Kerja Klinik Gottman Therapy, dan Studi Sosio-Kultural Indonesia.</p>
+        <p>&copy; SPA Infografis Keharmonisan Pasangan. Didesain untuk keterpahaman data mutakhir.</p>
+    </footer>
+
+    <script>
+        const horsemanData = {
+            criticism: {
+                title: "1. Criticism (Kritik Destruktif)",
+                horsemanDesc: "Menyerang karakter, kepribadian, atau identitas pasangan dengan kata-kata umum seperti 'kamu selalu...' atau 'kamu tidak pernah...'.",
+                antidoteTitle: "Penawar: Softened Startup (Permulaan Lembut)",
+                antidoteDesc: "Menggunakan kalimat berawalan 'Saya/Aku', mendeskripsikan fakta objektif tanpa tuduhan, dan menyatakan kebutuhan positif secara eksplisit.",
+                example: "<strong>Contoh Aplikasi:</strong> Ubah 'Kamu tidak pernah peduli dengan keuanganku' menjadi 'Aku merasa cemas saat melihat tagihan bulanan meningkat, bisa kita bahas alokasi anggaran bersama?'"
+            },
+            contempt: {
+                title: "2. Contempt (Penghinaan / Ejekan)",
+                horsemanDesc: "Pernyataan dari posisi superioritas moral atau intelektual, ejekan, sarkasme, memutar mata, atau mengecilkan kapasitas pasangan. Ini merupakan prediktor perceraian terkuat.",
+                antidoteTitle: "Penawar: Culture of Appreciation (Budaya Apresiasi)",
+                antidoteDesc: "Secara aktif membangun simpanan emosional dengan menyampaikan rasa terima kasih dan rasa hormat secara rutin atas hal-hal kecil.",
+                example: "<strong>Contoh Aplikasi:</strong> Ungkapkan secara spesifik: 'Terima kasih ya sudah meluangkan waktu mengurus dokumen ini hari ini, aku sangat menghargai bantuanmu.'"
+            },
+            defensiveness: {
+                title: "3. Defensiveness (Sikap Defensif)",
+                horsemanDesc: "Menolak tanggung jawab, memposisikan diri sebagai korban, membuat alasan, atau balik menyerang tuduhan pasangan.",
+                antidoteTitle: "Penawar: Taking Responsibility (Menerima Tanggung Jawab)",
+                antidoteDesc: "Mengakui sebagian dari peran diri dalam timbulnya masalah, sekecil apa pun, serta meminta maaf atas dampak emosional yang ditimbulkan.",
+                example: "<strong>Contoh Aplikasi:</strong> Ubah 'Aku kan sibuk kerja, kamu yang tidak ingatkan!' menjadi 'Kamu benar, aku lupa mengabari karena jadwal padat. Maaf ya sudah bikin kamu menunggu.'"
+            },
+            stonewalling: {
+                title: "4. Stonewalling (Pengabaian / Mogok Bicara)",
+                horsemanDesc: "Menutup diri penuh dari interaksi, tidak memberikan respons verbal/non-verbal, atau pergi menghindari pembicaraan akibat luapan emosi.",
+                antidoteTitle: "Penawar: Physiological Self-Soothing (Penenangan Fisiologis)",
+                antidoteDesc: "Menghentikan dialog secara resmi untuk mengambil jeda minimal 20 menit guna meredakan detak jantung dan sistem saraf otonom sebelum melanjutkan pembicaraan.",
+                example: "<strong>Contoh Aplikasi:</strong> Sampaikan: 'Aku merasa sangat tersulut saat ini dan butuh waktu 20 menit untuk menenangkan diri. Setelah itu mari kita bicara lagi dengan kepala dingin.'"
+            }
+        };
+
+        function switchHorseman(key) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('tab-' + key).classList.add('active');
+
+            const data = horsemanData[key];
+            const display = document.getElementById('horseman-display');
+            display.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2 border-b md:border-b-0 md:border-r border-slate-200 pb-4 md:pb-0 md:pr-6">
+                        <div class="text-xs font-bold text-[#9A031E] uppercase tracking-wider">Perilaku Destruktif</div>
+                        <h4 class="text-lg font-bold text-slate-800">${data.title}</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">${data.horsemanDesc}</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="text-xs font-bold text-[#0F4C5C] uppercase tracking-wider">Solusi Klinis Gottman</div>
+                        <h4 class="text-lg font-bold text-[#0F4C5C]">${data.antidoteTitle}</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">${data.antidoteDesc}</p>
+                        <div class="p-3 bg-white rounded-lg border border-slate-200 text-xs text-slate-700 mt-2">${data.example}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateBankSimulator() {
+            const pos = parseInt(document.getElementById('positive-range').value);
+            const neg = parseInt(document.getElementById('negative-range').value);
+
+            document.getElementById('positive-val').innerText = pos;
+            document.getElementById('negative-val').innerText = neg;
+
+            const ratio = (pos / neg).toFixed(1);
+            document.getElementById('ratio-result').innerText = ratio + " : 1";
+
+            const statusEl = document.getElementById('ratio-status');
+            const descEl = document.getElementById('ratio-desc');
+
+            if (ratio >= 20) {
+                statusEl.innerText = "Sangat Ideal (Keseharian Harmonis)";
+                statusEl.className = "text-xs font-bold px-3 py-1 rounded-full inline-block bg-emerald-100 text-emerald-800";
+                descEl.innerText = "Memenuhi rasio ideal interaksi positif harian yang sangat kokoh.";
+            } else if (ratio >= 5) {
+                statusEl.innerText = "Sehat (Kondisi Minimal Konflik)";
+                statusEl.className = "text-xs font-bold px-3 py-1 rounded-full inline-block bg-blue-100 text-blue-800";
+                descEl.innerText = "Memenuhi batas aman rasio interaksi positif saat terjadi konflik (5:1).";
+            } else if (ratio >= 1) {
+                statusEl.innerText = "Rentan (Di Bawah Ambang Aman)";
+                statusEl.className = "text-xs font-bold px-3 py-1 rounded-full inline-block bg-amber-100 text-amber-800";
+                descEl.innerText = "Risiko akumulasi rasa kecewa. Diperlukan penambahan apresiasi positif.";
+            } else {
+                statusEl.innerText = "Kritis (Risiko Keretakan Tinggi)";
+                statusEl.className = "text-xs font-bold px-3 py-1 rounded-full inline-block bg-rose-100 text-rose-800";
+                descEl.innerText = "Jumlah interaksi negatif mendominasi. Segera terapkan protokol klinis.";
+            }
+        }
+
+        function calculateBudget() {
+            const incA = parseFloat(document.getElementById('income-a').value) || 0;
+            const incB = parseFloat(document.getElementById('income-b').value) || 0;
+            const total = incA + incB;
+
+            document.getElementById('total-income').innerText = "Rp " + total.toLocaleString('id-ID');
+
+            const householdExp = total * 0.6;
+            document.getElementById('household-expense').innerText = "Rp " + householdExp.toLocaleString('id-ID');
+
+            if (total > 0) {
+                const ratioA = incA / total;
+                const ratioB = incB / total;
+
+                const contribA = householdExp * ratioA;
+                const contribB = householdExp * ratioB;
+
+                document.getElementById('contrib-a').innerText = `Rp ${Math.round(contribA).toLocaleString('id-ID')} (${Math.round(ratioA * 100)}%)`;
+                document.getElementById('contrib-b').innerText = `Rp ${Math.round(contribB).toLocaleString('id-ID')} (${Math.round(ratioB * 100)}%)`;
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            switchHorseman('criticism');
+            updateBankSimulator();
+            calculateBudget();
+
+            const divorceCtx = document.getElementById('divorceRiskChart').getContext('2d');
+            new Chart(divorceCtx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        ['Sebaya / Kecil', '(0-5 Tahun)'],
+                        ['Selisih Sedang', '(5-10 Tahun)'],
+                        ['Selisih Besar', '(10-20 Tahun)'],
+                        ['Selisih Ekstrem', '(>20 Tahun)']
+                    ],
+                    datasets: [{
+                        label: 'Peningkatan Risiko Perceraian Relatif (%)',
+                        data: [0, 18, 39, 98],
+                        backgroundColor: ['#0F4C5C', '#FB8B24', '#E36414', '#9A031E'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    return Array.isArray(label) ? label.join(' ') : label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) { return '+' + value + '%'; }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const satisfactionCtx = document.getElementById('satisfactionTrajectoryChart').getContext('2d');
+            new Chart(satisfactionCtx, {
+                type: 'line',
+                data: {
+                    labels: [
+                        ['Thn 1', '(Awal)'],
+                        ['Thn 3', '(Stabil)'],
+                        ['Thn 6', '(Fase Kritis)'],
+                        ['Thn 8', '(Guncangan)'],
+                        ['Thn 10+', '(Jangka Panjang)']
+                    ],
+                    datasets: [
+                        {
+                            label: 'Pasangan Sebaya (0-5 Thn)',
+                            data: [85, 83, 82, 80, 81],
+                            borderColor: '#0F4C5C',
+                            backgroundColor: '#0F4C5C',
+                            tension: 0.3,
+                            borderWidth: 3
+                        },
+                        {
+                            label: 'Beda Usia Besar (>=10 Thn)',
+                            data: [92, 88, 72, 64, 60],
+                            borderColor: '#E36414',
+                            backgroundColor: '#E36414',
+                            tension: 0.3,
+                            borderWidth: 3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    return Array.isArray(label) ? label.join(' ') : label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            min: 40,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) { return value + ' Pts'; }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
