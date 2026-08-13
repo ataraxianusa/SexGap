@@ -6,13 +6,13 @@ module.exports = {
       fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
       colors: {
         brand: {
-          teal: '#0F4C5C',
-          coral: '#E36414',
-          amber: '#FB8B24',
-          crimson: '#9A031E',
-          cream: '#FDFBF7',
-          softgray: '#F1F5F9',
-          dark: '#1E293B'
+          teal: '#0E4B55',
+          coral: '#E2622B',
+          amber: '#F2A33C',
+          crimson: '#9A1B2E',
+          cream: '#FAF5EC',
+          ink: '#1C2B29',
+          line: '#E5D9C8'
         }
       }
     }

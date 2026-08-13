@@ -13,379 +13,581 @@
     <meta property="og:image:height" content="670">
     <meta property="og:url" content="https://ataraxianusa.github.io/SexGap/">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="theme-color" content="#0F4C5C">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%230F4C5C' d='M12 21s-7.5-4.7-9.8-9C.6 8.6 2.5 5 6 5c2 0 3.3 1 4 2.3C10.7 6 12 5 14 5c3.5 0 5.4 3.6 3.8 7-2.3 4.3-9.8 9-9.8 9z'/%3E%3C/svg%3E">
+    <meta name="theme-color" content="#FAF5EC">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%239A1B2E' d='M12 21s-7.5-4.7-9.8-9C.6 8.6 2.5 5 6 5c2 0 3.3 1 4 2.3C10.7 6 12 5 14 5c3.5 0 5.4 3.6 3.8 7-2.3 4.3-9.8 9-9.8 9z'/%3E%3C/svg%3E">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Plus+Jakarta+Sans:wght@300..800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --paper: #FAF5EC;
+            --card: #FFFDF8;
+            --ink: #1C2B29;
+            --muted: #64736F;
+            --teal: #0E4B55;
+            --coral: #E2622B;
+            --amber: #F2A33C;
+            --crimson: #9A1B2E;
+            --line: #E5D9C8;
+        }
+        html { scroll-behavior: smooth; }
         body {
-            background-color: #FDFBF7;
-            color: #1E293B;
+            overflow-x: clip;
+            background-color: var(--paper);
+            background-image:
+                radial-gradient(1100px 480px at 88% -6%, rgba(242, 163, 60, .08), transparent 62%),
+                radial-gradient(900px 420px at -12% 12%, rgba(14, 75, 85, .07), transparent 60%);
+            background-attachment: fixed;
+            color: var(--ink);
             font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 620px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 320px;
-            max-height: 380px;
+        ::selection { background: rgba(226, 98, 43, .22); }
+        :focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 4px; }
+
+        .svg-inline { display: inline-block; vertical-align: middle; }
+        .skip-link {
+            position: absolute; left: -9999px; top: 8px;
+            background: var(--teal); color: #fff;
+            padding: .6rem 1rem; border-radius: 8px; font-weight: 700; font-size: .85rem; z-index: 60;
         }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
+        .skip-link:focus { left: 8px; }
+
+        /* ---- Masthead ---- */
+        .masthead { border-bottom: 1px solid var(--line); background: rgba(250, 245, 236, .85); backdrop-filter: blur(8px); }
+        .wordmark { font-weight: 800; letter-spacing: .14em; font-size: .74rem; text-transform: uppercase; color: var(--ink); }
+        .wordmark-mark { color: var(--crimson); }
+        .masthead-note { font-size: .72rem; color: var(--muted); font-weight: 600; letter-spacing: .04em; }
+
+        /* ---- Hero ---- */
+        .hero { text-align: center; }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: .5rem;
+            font-size: .72rem; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--coral);
+        }
+        .heart-svg { flex: none; }
+        .hero-title {
+            font-family: 'Fraunces', serif; font-weight: 560; letter-spacing: -.02em; line-height: 1.08;
+            font-size: clamp(2.4rem, 5.6vw, 4.1rem); color: var(--ink); margin-top: 1.1rem; text-wrap: balance;
+        }
+        .hero-title em {
+            font-style: italic; font-weight: 500; color: var(--teal);
+            position: relative; white-space: nowrap;
+        }
+        .hero-title em::after {
+            content: ''; position: absolute; left: 0; right: 0; bottom: -.14em; height: .45em;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12'%3E%3Cpath d='M1 8 C 20 2, 40 11, 60 6 S 100 3, 119 7' fill='none' stroke='%23E2622B' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+            opacity: .75;
+        }
+        .hero-lede { margin: 1.4rem auto 0; max-width: 44rem; color: var(--muted); font-size: 1.05rem; line-height: 1.75; }
+        .chip-row { margin-top: 1.6rem; display: flex; justify-content: center; gap: .6rem; flex-wrap: wrap; }
+        .chip {
+            display: inline-flex; align-items: center; gap: .5rem;
+            border: 1px solid var(--line); background: var(--card);
+            padding: .45rem .95rem; border-radius: 999px;
+            font-size: .8rem; font-weight: 700; color: var(--ink);
+        }
+        .chip b { font-family: 'Fraunces', serif; font-weight: 650; font-size: .95rem; color: var(--teal); font-variant-numeric: tabular-nums; }
+
+        /* ---- Poster infografis ---- */
+        .poster { position: relative; margin: 2.8rem auto 0; max-width: 58rem; }
+        @media (min-width: 640px) {
+            .poster::after {
+                content: ''; position: absolute; inset: -14px; z-index: 0; pointer-events: none;
+                border: 1px solid var(--line); border-radius: 1.5rem; transform: translate(14px, 14px);
             }
         }
-        .card-shadow {
-            box-shadow: 0 10px 25px -5px rgba(15, 76, 92, 0.08), 0 8px 10px -6px rgba(15, 76, 92, 0.04);
+        .poster-frame {
+            position: relative; z-index: 1; border-radius: 1.25rem; overflow: hidden;
+            border: 1px solid var(--line); background: var(--card);
+            box-shadow: 0 24px 48px -28px rgba(28, 43, 41, .3);
         }
-        .tab-btn.active {
-            background-color: #0F4C5C;
-            color: #FFFFFF;
-            border-color: #0F4C5C;
+        .poster img { display: block; width: 100%; height: auto; }
+        .poster-cap {
+            display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
+            margin-top: 1.1rem; padding: 0 .25rem; font-size: .82rem; color: var(--muted);
+        }
+        .poster-cap a { font-weight: 700; color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+        .poster-cap a:hover { color: var(--coral); }
+
+        /* ---- Cards & KPI ---- */
+        .card {
+            background: var(--card); border: 1px solid var(--line); border-radius: 1.1rem;
+            box-shadow: 0 1px 2px rgba(28, 43, 41, .03), 0 16px 32px -24px rgba(28, 43, 41, .16);
+        }
+        .card-hover { transition: border-color .25s ease, box-shadow .25s ease; }
+        .card-hover:hover { border-color: rgba(226, 98, 43, .45); box-shadow: 0 2px 4px rgba(28, 43, 41, .04), 0 20px 40px -24px rgba(28, 43, 41, .2); }
+        .kpi { padding: 1.5rem 1.2rem; text-align: center; }
+        .kpi-label { font-size: .66rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+        .kpi-num {
+            font-family: 'Fraunces', serif; font-weight: 620;
+            font-size: clamp(1.9rem, 3vw, 2.5rem); letter-spacing: -.02em; line-height: 1.1;
+            margin: .55rem 0 .4rem; font-variant-numeric: tabular-nums;
+        }
+        .kpi-desc { font-size: .78rem; line-height: 1.5; color: var(--muted); }
+        .c-crimson { color: var(--crimson); } .c-coral { color: var(--coral); }
+        .c-teal { color: var(--teal); } .c-amber { color: var(--amber); }
+
+        /* ---- Sections ---- */
+        .section { position: relative; }
+        .section-head { max-width: 46rem; }
+        .eyebrow {
+            display: flex; align-items: center; gap: .5rem;
+            font-size: .7rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--coral);
+        }
+        .section-title {
+            font-family: 'Fraunces', serif; font-weight: 580;
+            font-size: clamp(1.55rem, 2.6vw, 2.05rem); letter-spacing: -.015em; line-height: 1.18;
+            color: var(--ink); margin-top: .7rem; text-wrap: balance;
+        }
+        .section-lede { margin-top: .8rem; color: var(--muted); line-height: 1.75; font-size: .95rem; }
+        .panel-title { font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -.01em; color: var(--ink); }
+
+        .chart-container { position: relative; width: 100%; max-width: 620px; margin-left: auto; margin-right: auto; height: 320px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+
+        /* ---- Tabs Gottman ---- */
+        .tab-btn {
+            font-weight: 700; font-size: .8rem; padding: .5rem .95rem; border-radius: 999px;
+            border: 1px solid transparent; color: var(--muted);
+            transition: color .2s ease, background-color .2s ease;
+        }
+        .tab-btn:hover { color: var(--ink); background: rgba(14, 75, 85, .07); }
+        .tab-btn.active { background: var(--teal); color: #fff; }
+        .panel-destructive { border-left: 3px solid var(--crimson); background: rgba(154, 27, 46, .05); }
+        .panel-antidote { border-left: 3px solid var(--teal); background: rgba(14, 75, 85, .05); }
+        .panel-tag { font-size: .66rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+
+        /* ---- Simulator ---- */
+        .sim-tint { background: #F3ECDE; }
+        .slider-teal { accent-color: var(--teal); }
+        .slider-crimson { accent-color: var(--crimson); }
+        .ratio-num { font-family: 'Fraunces', serif; font-weight: 620; font-variant-numeric: tabular-nums; }
+
+        /* ---- Steps ---- */
+        .step { position: relative; }
+        .step-num {
+            width: 2.4rem; height: 2.4rem; border-radius: 9999px; background: var(--teal); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: .85rem;
+            box-shadow: 0 0 0 5px var(--paper), 0 0 0 6px var(--line);
+        }
+        .step-title { font-weight: 800; font-size: .82rem; color: var(--ink); }
+        .step-desc { font-size: .78rem; color: var(--muted); line-height: 1.55; }
+        @media (min-width: 768px) {
+            .step:not(:last-child)::after {
+                content: ''; position: absolute; top: 1.15rem; right: -0.9rem; width: 1.7rem;
+                border-top: 2px dashed rgba(154, 27, 46, .4);
+            }
+        }
+
+        /* ---- Form & tint cards ---- */
+        .field-label { font-size: .72rem; font-weight: 800; color: var(--muted); letter-spacing: .03em; }
+        .field-input {
+            width: 100%; padding: .55rem .75rem; border: 1px solid var(--line); border-radius: .65rem;
+            background: #fff; font-size: .85rem; font-weight: 700; color: var(--ink); transition: border-color .2s ease;
+        }
+        .field-input:focus { outline: none; border-color: var(--coral); box-shadow: 0 0 0 3px rgba(226, 98, 43, .15); }
+        .tint-card { background: var(--card); border: 1px solid var(--line); border-radius: 1rem; padding: 1.25rem; }
+        .tint-teal { border-left: 3px solid var(--teal); }
+        .tint-coral { border-left: 3px solid var(--coral); }
+        .tint-soft { background: #F4EDDF; }
+        .bullet { display: flex; gap: .6rem; align-items: flex-start; font-size: .85rem; color: #3E4A47; line-height: 1.6; }
+        .bullet-dot { flex: none; margin-top: .32rem; width: .5rem; height: .5rem; border-radius: 9999px; }
+        .dot-coral { background: var(--coral); } .dot-teal { background: var(--teal); }
+
+        /* ---- Footer ---- */
+        .footer { border-top: 1px solid var(--line); margin-top: 5rem; padding: 2.5rem 0 3rem; }
+        .footer-note { font-size: .78rem; color: var(--muted); line-height: 1.7; }
+        .footer-links a { font-weight: 700; font-size: .82rem; color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+        .footer-links a:hover { color: var(--coral); }
+
+        /* ---- Benang merah (thread) ---- */
+        .thread-wrap { position: relative; }
+        @media (min-width: 1024px) {
+            .thread-wrap::before {
+                content: ''; position: absolute; top: 0; bottom: 0; left: .625rem; width: 2px; border-radius: 2px;
+                background: repeating-linear-gradient(to bottom, var(--crimson) 0 7px, transparent 7px 16px);
+                opacity: .4;
+            }
+        }
+
+        /* ---- Reveal ---- */
+        .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .75s cubic-bezier(.22, 1, .36, 1), transform .75s cubic-bezier(.22, 1, .36, 1); }
+        .js .reveal.in-view { opacity: 1; transform: none; }
+        .js .d1 { transition-delay: .06s; } .js .d2 { transition-delay: .14s; } .js .d3 { transition-delay: .22s; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+            *, *::before, *::after { animation: none !important; }
         }
     </style>
-<style id="tailwind">*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:Plus Jakarta Sans,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.relative{position:relative}.mx-auto{margin-left:auto;margin-right:auto}.my-2{margin-top:.5rem;margin-bottom:.5rem}.my-6{margin-top:1.5rem;margin-bottom:1.5rem}.mb-1{margin-bottom:.25rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mt-1{margin-top:.25rem}.mt-12{margin-top:3rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.inline-block{display:inline-block}.flex{display:flex}.grid{display:grid}.h-7{height:1.75rem}.w-7{width:1.75rem}.w-full{width:100%}.min-w-\[220px\]{min-width:220px}.max-w-3xl{max-width:48rem}.max-w-6xl{max-width:72rem}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-12>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(3rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(3rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.5rem}.rounded-xl{border-radius:.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-amber-200{--tw-border-opacity:1;border-color:rgb(253 230 138/var(--tw-border-opacity,1))}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249/var(--tw-border-opacity,1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240/var(--tw-border-opacity,1))}.border-slate-300{--tw-border-opacity:1;border-color:rgb(203 213 225/var(--tw-border-opacity,1))}.border-white\/20{border-color:hsla(0,0%,100%,.2)}.bg-\[\#0F4C5C\]{--tw-bg-opacity:1;background-color:rgb(15 76 92/var(--tw-bg-opacity,1))}.bg-\[\#FDFBF7\]{--tw-bg-opacity:1;background-color:rgb(253 251 247/var(--tw-bg-opacity,1))}.bg-amber-100{--tw-bg-opacity:1;background-color:rgb(254 243 199/var(--tw-bg-opacity,1))}.bg-amber-50{--tw-bg-opacity:1;background-color:rgb(255 251 235/var(--tw-bg-opacity,1))}.bg-blue-100{--tw-bg-opacity:1;background-color:rgb(219 234 254/var(--tw-bg-opacity,1))}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229/var(--tw-bg-opacity,1))}.bg-rose-100{--tw-bg-opacity:1;background-color:rgb(255 228 230/var(--tw-bg-opacity,1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252/var(--tw-bg-opacity,1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-white\/10{background-color:hsla(0,0%,100%,.1)}.bg-white\/20{background-color:hsla(0,0%,100%,.2)}.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}.from-\[\#0F4C5C\]{--tw-gradient-from:#0f4c5c var(--tw-gradient-from-position);--tw-gradient-to:rgba(15,76,92,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.via-\[\#1D6375\]{--tw-gradient-to:rgba(29,99,117,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),#1d6375 var(--tw-gradient-via-position),var(--tw-gradient-to)}.to-\[\#E36414\]{--tw-gradient-to:#e36414 var(--tw-gradient-to-position)}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.pb-16{padding-bottom:4rem}.pb-4{padding-bottom:1rem}.pt-3{padding-top:.75rem}.pt-4{padding-top:1rem}.pt-6{padding-top:1.5rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-light{font-weight:300}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-.025em}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.text-\[\#0F4C5C\]{--tw-text-opacity:1;color:rgb(15 76 92/var(--tw-text-opacity,1))}.text-\[\#9A031E\]{--tw-text-opacity:1;color:rgb(154 3 30/var(--tw-text-opacity,1))}.text-\[\#E36414\]{--tw-text-opacity:1;color:rgb(227 100 20/var(--tw-text-opacity,1))}.text-\[\#FB8B24\]{--tw-text-opacity:1;color:rgb(251 139 36/var(--tw-text-opacity,1))}.text-amber-800{--tw-text-opacity:1;color:rgb(146 64 14/var(--tw-text-opacity,1))}.text-amber-900{--tw-text-opacity:1;color:rgb(120 53 15/var(--tw-text-opacity,1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175/var(--tw-text-opacity,1))}.text-emerald-800{--tw-text-opacity:1;color:rgb(6 95 70/var(--tw-text-opacity,1))}.text-rose-800{--tw-text-opacity:1;color:rgb(159 18 57/var(--tw-text-opacity,1))}.text-slate-100{--tw-text-opacity:1;color:rgb(241 245 249/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139/var(--tw-text-opacity,1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105/var(--tw-text-opacity,1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85/var(--tw-text-opacity,1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.underline{text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.accent-\[\#0F4C5C\]{accent-color:#0f4c5c}.accent-\[\#9A031E\]{accent-color:#9a031e}.shadow-lg{--tw-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.hover\:border-\[\#0F4C5C\]:hover{--tw-border-opacity:1;border-color:rgb(15 76 92/var(--tw-border-opacity,1))}.hover\:border-\[\#E36414\]:hover{--tw-border-opacity:1;border-color:rgb(227 100 20/var(--tw-border-opacity,1))}.hover\:text-slate-500:hover{--tw-text-opacity:1;color:rgb(100 116 139/var(--tw-text-opacity,1))}@media (min-width:640px){.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.sm\:p-8{padding:2rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:px-8{padding-left:2rem;padding-right:2rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}.sm\:text-sm{font-size:.875rem;line-height:1.25rem}}@media (min-width:768px){.md\:col-span-2{grid-column:span 2/span 2}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.md\:flex-row{flex-direction:row}.md\:border-b-0{border-bottom-width:0}.md\:border-r{border-right-width:1px}.md\:pb-0{padding-bottom:0}.md\:pr-6{padding-right:1.5rem}.md\:text-left{text-align:left}.md\:text-5xl{font-size:3rem;line-height:1}}@media (min-width:1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.lg\:text-left{text-align:left}}</style>
+<style id="tailwind">*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:Plus Jakarta Sans,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.mx-auto{margin-left:auto;margin-right:auto}.my-6{margin-top:1.5rem;margin-bottom:1.5rem}.mb-1{margin-bottom:.25rem}.mb-6{margin-bottom:1.5rem}.mt-1{margin-top:.25rem}.mt-10{margin-top:2.5rem}.mt-2{margin-top:.5rem}.mt-6{margin-top:1.5rem}.mt-9{margin-top:2.25rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.min-h-\[220px\]{min-height:220px}.w-full{width:100%}.max-w-6xl{max-width:72rem}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-10{gap:2.5rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-20>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.text-wrap{text-wrap:wrap}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.5rem}.rounded-xl{border-radius:.75rem}.border{border-width:1px}.border-t{border-top-width:1px}.border-\[\#E5D9C8\]{--tw-border-opacity:1;border-color:rgb(229 217 200/var(--tw-border-opacity,1))}.border-amber-200{--tw-border-opacity:1;border-color:rgb(253 230 138/var(--tw-border-opacity,1))}.bg-amber-100{--tw-bg-opacity:1;background-color:rgb(254 243 199/var(--tw-bg-opacity,1))}.bg-amber-50{--tw-bg-opacity:1;background-color:rgb(255 251 235/var(--tw-bg-opacity,1))}.bg-blue-100{--tw-bg-opacity:1;background-color:rgb(219 234 254/var(--tw-bg-opacity,1))}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229/var(--tw-bg-opacity,1))}.bg-rose-100{--tw-bg-opacity:1;background-color:rgb(255 228 230/var(--tw-bg-opacity,1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-4{padding-top:1rem}.pb-4,.py-4{padding-bottom:1rem}.pt-1{padding-top:.25rem}.pt-16{padding-top:4rem}.pt-4{padding-top:1rem}.text-center{text-align:center}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:700}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.text-\[\#0E4B55\]{--tw-text-opacity:1;color:rgb(14 75 85/var(--tw-text-opacity,1))}.text-\[\#9A1B2E\]{--tw-text-opacity:1;color:rgb(154 27 46/var(--tw-text-opacity,1))}.text-\[\#E2622B\]{--tw-text-opacity:1;color:rgb(226 98 43/var(--tw-text-opacity,1))}.text-amber-800{--tw-text-opacity:1;color:rgb(146 64 14/var(--tw-text-opacity,1))}.text-amber-900{--tw-text-opacity:1;color:rgb(120 53 15/var(--tw-text-opacity,1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175/var(--tw-text-opacity,1))}.text-emerald-800{--tw-text-opacity:1;color:rgb(6 95 70/var(--tw-text-opacity,1))}.text-rose-800{--tw-text-opacity:1;color:rgb(159 18 57/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139/var(--tw-text-opacity,1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105/var(--tw-text-opacity,1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85/var(--tw-text-opacity,1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59/var(--tw-text-opacity,1))}.underline{text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.outline{outline-style:solid}.blur{--tw-blur:blur(8px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-filter{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}@media (min-width:640px){.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.sm\:space-y-24>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(6rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(6rem*var(--tw-space-y-reverse))}.sm\:p-7{padding:1.75rem}.sm\:px-8{padding-left:2rem;padding-right:2rem}.sm\:pt-20{padding-top:5rem}}@media (min-width:768px){.md\:col-span-2{grid-column:span 2/span 2}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}}@media (min-width:1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.lg\:divide-x>:not([hidden])~:not([hidden]){--tw-divide-x-reverse:0;border-right-width:calc(1px*var(--tw-divide-x-reverse));border-left-width:calc(1px*(1 - var(--tw-divide-x-reverse)))}.lg\:divide-\[\#E5D9C8\]>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgb(229 217 200/var(--tw-divide-opacity,1))}.lg\:px-16{padding-left:4rem;padding-right:4rem}.lg\:text-left{text-align:left}}</style>
 </head>
-<body class="antialiased pb-16">
+<body class="antialiased">
+    <script>document.documentElement.classList.add('js');</script>
+    <a class="skip-link" href="#main">Langsung ke konten</a>
 
-    <header class="bg-gradient-to-r from-[#0F4C5C] via-[#1D6375] to-[#E36414] text-white py-12 px-4 sm:px-8 shadow-lg">
-        <div class="max-w-6xl mx-auto text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="max-w-3xl">
-                <div class="inline-block bg-white/20 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-3">
-                    Analisis Empiris & Kerangka Gottman
-                </div>
-                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                    Harmoni Relasi Pasangan & Dinamika Komunikasi
-                </h1>
-                <p class="mt-3 text-base sm:text-lg text-slate-100 font-light leading-relaxed">
-                    Visualisasi komprehensif mengenai evolusi kepuasan pernikahan, strategi komunikasi berbasis bukti klinis, keseimbangan kekuasaan, dan navigasi norma sosio-kultural di Indonesia.
-                </p>
-            </div>
-            <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/20 text-center min-w-[220px]">
-                <div class="text-3xl font-extrabold text-[#FB8B24]">5 : 1</div>
-                <div class="text-xs text-slate-100 font-medium mt-1">Rasio Minimal Interaksi Positif Saat Konflik</div>
-            </div>
+    <header class="masthead">
+        <div class="max-w-6xl mx-auto px-5 sm:px-8 py-4 flex items-center justify-between gap-4">
+            <a href="#main" class="wordmark">Harmoni<span class="wordmark-mark">·</span>Relasi</a>
+            <span class="masthead-note">Panduan interaktif · Berbasis riset</span>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 mt-8 space-y-12">
+    <main id="main">
+        <div class="thread-wrap max-w-6xl mx-auto px-5 sm:px-8 lg:px-16 pt-16 sm:pt-20 pb-4 space-y-20 sm:space-y-24">
 
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-white p-5 rounded-xl border border-slate-200 card-shadow text-center hover:border-[#E36414] transition-all">
-                <div class="text-xs font-bold text-slate-400 uppercase tracking-wide">Risiko Perceraian Gap >20 Thn</div>
-                <div class="text-3xl font-extrabold text-[#9A031E] my-2">~100%</div>
-                <p class="text-xs text-slate-600 leading-snug">Hampir 2x lipat dibanding pasangan usia sebaya.</p>
-            </div>
-            <div class="bg-white p-5 rounded-xl border border-slate-200 card-shadow text-center hover:border-[#E36414] transition-all">
-                <div class="text-xs font-bold text-slate-400 uppercase tracking-wide">Fase Kritis Kepuasan</div>
-                <div class="text-3xl font-extrabold text-[#E36414] my-2">Thn 6 - 10</div>
-                <p class="text-xs text-slate-600 leading-snug">Penurunan tajam kepuasan pada pasangan beda usia besar.</p>
-            </div>
-            <div class="bg-white p-5 rounded-xl border border-slate-200 card-shadow text-center hover:border-[#0F4C5C] transition-all">
-                <div class="text-xs font-bold text-slate-400 uppercase tracking-wide">Rasio Interaksi Harian</div>
-                <div class="text-3xl font-extrabold text-[#0F4C5C] my-2">20 : 1</div>
-                <p class="text-xs text-slate-600 leading-snug">Rasio deposit emosional positif harian yang sehat.</p>
-            </div>
-            <div class="bg-white p-5 rounded-xl border border-slate-200 card-shadow text-center hover:border-[#0F4C5C] transition-all">
-                <div class="text-xs font-bold text-slate-400 uppercase tracking-wide">Jeda Penenangan Diri</div>
-                <div class="text-3xl font-extrabold text-[#FB8B24] my-2">20 Menit</div>
-                <p class="text-xs text-slate-600 leading-snug">Waktu minimal meredakan luapan emosi fisiologis.</p>
-            </div>
-        </section>
-
-        <section class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 card-shadow space-y-6">
-            <div class="border-b border-slate-100 pb-4">
-                <span class="text-xs font-bold text-[#E36414] uppercase tracking-wider">Bagian 1</span>
-                <h2 class="text-2xl font-bold text-[#0F4C5C] mt-1">Dinamika Age-Sex Gap & Evolusi Kepuasan Pernikahan</h2>
-                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                    Studi longitudinal menunjukkan bahwa selisih usia (age gap) awal memengaruhi stabilitas relasi, namun variabel prosesual seperti empati dan gaya komunikasi memegang peran kunci. Meskipun pasangan beda usia besar melaporkan kepuasan awal yang tinggi, mereka lebih rentan terhadap guncangan ekonomi dan ketidakselarasan fase kehidupan (life stage disparity).
+            <!-- HERO -->
+            <section class="hero">
+                <p class="hero-eyebrow reveal">
+                    <svg class="svg-inline heart-svg" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="#9A1B2E" d="M12 21s-7.5-4.7-9.8-9C.6 8.6 2.5 5 6 5c2 0 3.3 1 4 2.3C10.7 6 12 5 14 5c3.5 0 5.4 3.6 3.8 7-2.3 4.3-9.8 9-9.8 9z"/>
+                    </svg>
+                    Analisis Empiris &amp; Kerangka Gottman
                 </p>
-            </div>
+                <h1 class="hero-title reveal d1">Merajut <em>harmoni</em> di antara dua usia</h1>
+                <p class="hero-lede reveal d2">
+                    Visualisasi komprehensif mengenai evolusi kepuasan pernikahan, strategi komunikasi berbasis bukti klinis, keseimbangan kekuasaan, dan navigasi norma sosio-kultural di Indonesia.
+                </p>
+                <div class="chip-row reveal d3">
+                    <span class="chip"><b>5 : 1</b> Rasio minimal interaksi positif saat konflik</span>
+                    <span class="chip">Berdasarkan studi longitudinal &amp; terapi pasangan</span>
+                </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                <div class="space-y-3">
-                    <h3 class="text-lg font-bold text-slate-800 text-center lg:text-left">
-                        Proyeksi Peningkatan Risiko Perceraian Relatif
-                    </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                        Data statistik menunjukkan peningkatan risiko perceraian yang berbanding lurus dengan besarnya selisih usia pasangan dibandingkan baseline pasangan sebaya.
-                    </p>
-                    <div class="chart-container">
-                        <canvas id="divorceRiskChart" role="img" aria-label="Grafik batang: peningkatan risiko perceraian relatif berdasarkan selisih usia pasangan"></canvas>
+                <figure class="poster reveal d2">
+                    <div class="poster-frame">
+                        <a href="assets/panduan-lengkap.png" target="_blank" rel="noopener" aria-label="Buka panduan lengkap dalam ukuran penuh">
+                            <img src="assets/panduan-lengkap.png" alt="Panduan Harmoni Hubungan Beda Usia — infografis lengkap" width="2752" height="1536" loading="eager" fetchpriority="high">
+                        </a>
+                    </div>
+                    <figcaption class="poster-cap">
+                        <span>Panduan lengkap hubungan beda usia · klik gambar untuk ukuran penuh</span>
+                        <a href="sumber-riset.pdf" target="_blank" rel="noopener">Unduh sumber riset (PDF) &rarr;</a>
+                    </figcaption>
+                </figure>
+            </section>
+
+            <!-- DATA RIBBON -->
+            <section class="card reveal" aria-label="Ringkasan data kunci">
+                <div class="grid grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-[#E5D9C8]">
+                    <div class="kpi">
+                        <div class="kpi-label">Risiko Perceraian Gap &gt;20 Thn</div>
+                        <div class="kpi-num c-crimson">~100%</div>
+                        <p class="kpi-desc">Hampir 2x lipat dibanding pasangan usia sebaya.</p>
+                    </div>
+                    <div class="kpi">
+                        <div class="kpi-label">Fase Kritis Kepuasan</div>
+                        <div class="kpi-num c-coral">Thn 6 – 10</div>
+                        <p class="kpi-desc">Penurunan tajam kepuasan pada pasangan beda usia besar.</p>
+                    </div>
+                    <div class="kpi">
+                        <div class="kpi-label">Rasio Interaksi Harian</div>
+                        <div class="kpi-num c-teal">20 : 1</div>
+                        <p class="kpi-desc">Rasio deposit emosional positif harian yang sehat.</p>
+                    </div>
+                    <div class="kpi">
+                        <div class="kpi-label">Jeda Penenangan Diri</div>
+                        <div class="kpi-num c-amber">20 Menit</div>
+                        <p class="kpi-desc">Waktu minimal meredakan luapan emosi fisiologis.</p>
                     </div>
                 </div>
+            </section>
 
-                <div class="space-y-3">
-                    <h3 class="text-lg font-bold text-slate-800 text-center lg:text-left">
-                        Trajektori Kepuasan Hubungan Sepanjang Masa Pernikahan
-                    </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                        Pasangan dengan age gap besar mengalami penurunan kepuasan yang lebih curam pada tahun ke-6 hingga ke-10, terutama saat menghadapi krisis ekonomi atau kesehatan.
+            <!-- BAGIAN 1 -->
+            <section class="section reveal" id="bagian-1">
+                <div class="section-head">
+                    <p class="eyebrow">
+                        <svg class="svg-inline heart-svg" width="11" height="11" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="#9A1B2E" d="M12 21s-7.5-4.7-9.8-9C.6 8.6 2.5 5 6 5c2 0 3.3 1 4 2.3C10.7 6 12 5 14 5c3.5 0 5.4 3.6 3.8 7-2.3 4.3-9.8 9-9.8 9z"/>
+                        </svg>
+                        Bagian 1
                     </p>
-                    <div class="chart-container">
-                        <canvas id="satisfactionTrajectoryChart" role="img" aria-label="Grafik garis: trajektori kepuasan hubungan pasangan sebaya versus beda usia besar"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 pt-4 border-t border-slate-100">
-                <div class="p-4 bg-[#FDFBF7] rounded-xl border border-slate-200">
-                    <div class="text-sm font-bold text-[#0F4C5C] mb-1">Pola Pria Lebih Tua (Global Baseline)</div>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Pola rata-rata global adalah selisih 4 tahun dengan pria lebih tua. Pria memperoleh rasa aman reproduktif, namun rentan cemas akan kecukupan seksual & kesehatan fisik seiring penuaan.
+                    <h2 class="section-title">Dinamika Age-Sex Gap &amp; Evolusi Kepuasan Pernikahan</h2>
+                    <p class="section-lede">
+                        Studi longitudinal menunjukkan bahwa selisih usia (age gap) awal memengaruhi stabilitas relasi, namun variabel prosesual seperti empati dan gaya komunikasi memegang peran kunci. Meskipun pasangan beda usia besar melaporkan kepuasan awal yang tinggi, mereka lebih rentan terhadap guncangan ekonomi dan ketidakselarasan fase kehidupan (life stage disparity).
                     </p>
                 </div>
-                <div class="p-4 bg-[#FDFBF7] rounded-xl border border-slate-200">
-                    <div class="text-sm font-bold text-[#E36414] mb-1">Pola Wanita Lebih Tua (Reverse Age Gap)</div>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Menunjukkan komitmen emosional dan kepuasan seksual perempuan yang tinggi, namun menghadapi tantangan risiko dinamika maternalistik dan tekanan stigma sosial yang lebih keras.
-                    </p>
-                </div>
-            </div>
-        </section>
 
-        <section class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 card-shadow space-y-6">
-            <div class="border-b border-slate-100 pb-4">
-                <span class="text-xs font-bold text-[#E36414] uppercase tracking-wider">Bagian 2</span>
-                <h2 class="text-2xl font-bold text-[#0F4C5C] mt-1">Arsitektur Komunikasi Klinik: Kerangka Kerja Gottman</h2>
-                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                    Dr. John Gottman mengidentifikasi 4 pola komunikasi destruktif (The Four Horsemen) yang menjadi prediktor utama keretakan hubungan. Untuk menjaga keharmonisan, setiap perilaku destruktif harus digantikan secara konsisten dengan penawar klinis (The Antidotes).
-                </p>
-            </div>
-
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4" role="tablist" aria-label="Empat Penunggang Gottman">
-                <button onclick="switchHorseman('criticism')" id="tab-criticism" role="tab" aria-selected="true" aria-controls="horseman-display" class="tab-btn active text-xs sm:text-sm font-bold py-2.5 px-3 rounded-lg border border-slate-200 transition-all">
-                    1. Criticism
-                </button>
-                <button onclick="switchHorseman('contempt')" id="tab-contempt" role="tab" aria-selected="false" aria-controls="horseman-display" class="tab-btn text-xs sm:text-sm font-bold py-2.5 px-3 rounded-lg border border-slate-200 transition-all">
-                    2. Contempt
-                </button>
-                <button onclick="switchHorseman('defensiveness')" id="tab-defensiveness" role="tab" aria-selected="false" aria-controls="horseman-display" class="tab-btn text-xs sm:text-sm font-bold py-2.5 px-3 rounded-lg border border-slate-200 transition-all">
-                    3. Defensiveness
-                </button>
-                <button onclick="switchHorseman('stonewalling')" id="tab-stonewalling" role="tab" aria-selected="false" aria-controls="horseman-display" class="tab-btn text-xs sm:text-sm font-bold py-2.5 px-3 rounded-lg border border-slate-200 transition-all">
-                    4. Stonewalling
-                </button>
-            </div>
-
-            <div id="horseman-display" role="tabpanel" class="bg-[#FDFBF7] p-6 rounded-xl border border-slate-200 transition-all">
-            </div>
-
-            <div class="mt-8 pt-6 border-t border-slate-100">
-                <h3 class="text-lg font-bold text-[#0F4C5C] mb-2">Simulasi Interaktif: Emotional Bank Account (Tabungan Emosional)</h3>
-                <p class="text-xs text-slate-600 mb-6 leading-relaxed">
-                    Setiap interaksi positif merupakan setoran (deposit), sedangkan kritik/penghinaan adalah penarikan (withdrawal). Atur slider di bawah untuk melihat dampak rasio interaksi terhadap tingkat kesehatan relasi Anda.
-                </p>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                    <div class="space-y-4 md:col-span-2 bg-slate-50 p-5 rounded-xl border border-slate-200">
-                        <div>
-                            <div class="flex justify-between text-xs font-bold mb-1">
-                                <label for="positive-range">Setoran Positif (Pujian, Sentuhan, Apresiasi)</label>
-                                <output id="positive-val" class="text-[#0F4C5C]">15</output>
-                            </div>
-                            <input type="range" id="positive-range" min="1" max="30" value="15" class="w-full accent-[#0F4C5C]" oninput="updateBankSimulator()">
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-xs font-bold mb-1">
-                                <label for="negative-range">Penarikan Negatif (Kritik, Defensif, Konflik)</label>
-                                <output id="negative-val" class="text-[#9A031E]">2</output>
-                            </div>
-                            <input type="range" id="negative-range" min="1" max="10" value="2" class="w-full accent-[#9A031E]" oninput="updateBankSimulator()">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-9">
+                    <div class="space-y-4">
+                        <h3 class="panel-title text-lg text-center lg:text-left">Proyeksi Peningkatan Risiko Perceraian Relatif</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed text-center lg:text-left">
+                            Data statistik menunjukkan peningkatan risiko perceraian yang berbanding lurus dengan besarnya selisih usia pasangan dibandingkan baseline pasangan sebaya.
+                        </p>
+                        <div class="chart-container">
+                            <canvas id="divorceRiskChart" role="img" aria-label="Grafik batang: peningkatan risiko perceraian relatif berdasarkan selisih usia pasangan"></canvas>
                         </div>
                     </div>
-
-                    <div class="bg-white p-5 rounded-xl border border-slate-200 text-center space-y-2 card-shadow">
-                        <div class="text-xs font-bold text-slate-400 uppercase">Rasio Aktual Anda</div>
-                        <div id="ratio-result" aria-live="polite" class="text-3xl font-extrabold text-[#0F4C5C]">7.5 : 1</div>
-                        <div id="ratio-status" aria-live="polite" class="text-xs font-bold px-3 py-1 rounded-full inline-block bg-emerald-100 text-emerald-800">
-                            Sangat Sehat (Memenuhi Syarat Konflik)
+                    <div class="space-y-4">
+                        <h3 class="panel-title text-lg text-center lg:text-left">Trajektori Kepuasan Hubungan Sepanjang Masa Pernikahan</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed text-center lg:text-left">
+                            Pasangan dengan age gap besar mengalami penurunan kepuasan yang lebih curam pada tahun ke-6 hingga ke-10, terutama saat menghadapi krisis ekonomi atau kesehatan.
+                        </p>
+                        <div class="chart-container">
+                            <canvas id="satisfactionTrajectoryChart" role="img" aria-label="Grafik garis: trajektori kepuasan hubungan pasangan sebaya versus beda usia besar"></canvas>
                         </div>
-                        <p id="ratio-desc" class="text-[11px] text-slate-500 leading-tight">
-                            Rasio di atas 5:1 memberikan perlindungan memadai saat terjadi perbedaan pendapat.
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
+                    <div class="tint-card tint-teal">
+                        <div class="text-sm font-bold mb-1">Pola Pria Lebih Tua <span class="text-slate-400 font-semibold">(Global Baseline)</span></div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Pola rata-rata global adalah selisih 4 tahun dengan pria lebih tua. Pria memperoleh rasa aman reproduktif, namun rentan cemas akan kecukupan seksual &amp; kesehatan fisik seiring penuaan.
+                        </p>
+                    </div>
+                    <div class="tint-card tint-coral">
+                        <div class="text-sm font-bold mb-1">Pola Wanita Lebih Tua <span class="text-slate-400 font-semibold">(Reverse Age Gap)</span></div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Menunjukkan komitmen emosional dan kepuasan seksual perempuan yang tinggi, namun menghadapi tantangan risiko dinamika maternalistik dan tekanan stigma sosial yang lebih keras.
                         </p>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 card-shadow space-y-6">
-            <div class="border-b border-slate-100 pb-4">
-                <span class="text-xs font-bold text-[#E36414] uppercase tracking-wider">Bagian 3</span>
-                <h2 class="text-2xl font-bold text-[#0F4C5C] mt-1">Protokol 5 Langkah Reflective Listening & Regulasi Fisiologis</h2>
-                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                    Secara neurobiologis, mendengar reflektif menekan respons amigdala (fight-or-flight) dan mengaktifkan Korteks Prefrontal untuk berpikir rasional. Ikuti langkah terstruktur ini saat mengurai perbedaan pendapat.
-                </p>
-            </div>
+            <!-- BAGIAN 2 -->
+            <section class="section reveal" id="bagian-2">
+                <div class="section-head">
+                    <p class="eyebrow">
+                        <svg class="svg-inline heart-svg" width="11" height="11" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="#9A1B2E" d="M12 21s-7.5-4.7-9.8-9C.6 8.6 2.5 5 6 5c2 0 3.3 1 4 2.3C10.7 6 12 5 14 5c3.5 0 5.4 3.6 3.8 7-2.3 4.3-9.8 9-9.8 9z"/>
+                        </svg>
+                        Bagian 2
+                    </p>
+                    <h2 class="section-title">Arsitektur Komunikasi Klinik: Kerangka Kerja Gottman</h2>
+                    <p class="section-lede">
+                        Dr. John Gottman mengidentifikasi 4 pola komunikasi destruktif (The Four Horsemen) yang menjadi prediktor utama keretakan hubungan. Untuk menjaga keharmonisan, setiap perilaku destruktif harus digantikan secara konsisten dengan penawar klinis (The Antidotes).
+                    </p>
+                </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-3 relative">
-                <div class="bg-[#FDFBF7] p-4 rounded-xl border border-slate-200 space-y-2 flex flex-col justify-between">
-                    <div>
-                        <div class="w-7 h-7 rounded-full bg-[#0F4C5C] text-white font-extrabold text-xs flex items-center justify-center mb-2">1</div>
-                        <div class="font-bold text-xs text-[#0F4C5C]">Ruang Tanpa Distraksi</div>
-                        <p class="text-[11px] text-slate-600 mt-1 leading-snug">Menyingkirkan gadget dan gangguan fisik sebelum dialog dimulai.</p>
+                <div class="card p-5 sm:p-7 mt-9">
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6" role="tablist" aria-label="Empat Penunggang Gottman">
+                        <button onclick="switchHorseman('criticism')" id="tab-criticism" role="tab" aria-selected="true" aria-controls="horseman-display" class="tab-btn active">1. Criticism</button>
+                        <button onclick="switchHorseman('contempt')" id="tab-contempt" role="tab" aria-selected="false" aria-controls="horseman-display" class="tab-btn">2. Contempt</button>
+                        <button onclick="switchHorseman('defensiveness')" id="tab-defensiveness" role="tab" aria-selected="false" aria-controls="horseman-display" class="tab-btn">3. Defensiveness</button>
+                        <button onclick="switchHorseman('stonewalling')" id="tab-stonewalling" role="tab" aria-selected="false" aria-controls="horseman-display" class="tab-btn">4. Stonewalling</button>
                     </div>
+                    <div id="horseman-display" role="tabpanel" class="min-h-[220px]"></div>
                 </div>
-                <div class="bg-[#FDFBF7] p-4 rounded-xl border border-slate-200 space-y-2 flex flex-col justify-between">
-                    <div>
-                        <div class="w-7 h-7 rounded-full bg-[#0F4C5C] text-white font-extrabold text-xs flex items-center justify-center mb-2">2</div>
-                        <div class="font-bold text-xs text-[#0F4C5C]">Atensi Penuh</div>
-                        <p class="text-[11px] text-slate-600 mt-1 leading-snug">Mendengarkan tanpa interupsi atau menyiapkan kalimat sanggahan.</p>
-                    </div>
-                </div>
-                <div class="bg-[#FDFBF7] p-4 rounded-xl border border-slate-200 space-y-2 flex flex-col justify-between">
-                    <div>
-                        <div class="w-7 h-7 rounded-full bg-[#0F4C5C] text-white font-extrabold text-xs flex items-center justify-center mb-2">3</div>
-                        <div class="font-bold text-xs text-[#0F4C5C]">Parafrase Reflektif</div>
-                        <p class="text-[11px] text-slate-600 mt-1 leading-snug">Mengulang inti pesan: "Yang aku tangkap, kamu merasa..."</p>
-                    </div>
-                </div>
-                <div class="bg-[#FDFBF7] p-4 rounded-xl border border-slate-200 space-y-2 flex flex-col justify-between">
-                    <div>
-                        <div class="w-7 h-7 rounded-full bg-[#0F4C5C] text-white font-extrabold text-xs flex items-center justify-center mb-2">4</div>
-                        <div class="font-bold text-xs text-[#0F4C5C]">Validasi Emosional</div>
-                        <p class="text-[11px] text-slate-600 mt-1 leading-snug">Mengakui keabsahan perasaan tanpa harus menyetujui seluruh opini.</p>
-                    </div>
-                </div>
-                <div class="bg-[#FDFBF7] p-4 rounded-xl border border-slate-200 space-y-2 flex flex-col justify-between">
-                    <div>
-                        <div class="w-7 h-7 rounded-full bg-[#0F4C5C] text-white font-extrabold text-xs flex items-center justify-center mb-2">5</div>
-                        <div class="font-bold text-xs text-[#0F4C5C]">Klarifikasi Terbuka</div>
-                        <p class="text-[11px] text-slate-600 mt-1 leading-snug">Mengajukan pertanyaan eksploratif guna mengonfirmasi pemahaman.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 card-shadow space-y-6">
-            <div class="border-b border-slate-100 pb-4">
-                <span class="text-xs font-bold text-[#E36414] uppercase tracking-wider">Bagian 4</span>
-                <h2 class="text-2xl font-bold text-[#0F4C5C] mt-1">Keseimbangan Kekuasaan & Transparansi Finansial Berbasis Ekuitas</h2>
-                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                    Ketimpangan usia atau pendapatan berisiko memicu pola paternalistik/maternalistik yang merusak otonomi individu, terutama bila salah satu pihak di bawah usia 25 tahun (fase kematangan korteks prefrontal). Pengelolaan keuangan berbasis proporsi persentase membantu menjaga kesetaraan hak.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                <div class="bg-[#FDFBF7] p-6 rounded-xl border border-slate-200 space-y-4">
-                    <h3 class="text-base font-bold text-[#0F4C5C]">Kalkulator Alokasi Finansial Proporsional</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Masukkan estimasi pendapatan bulanan kedua pihak untuk menghitung kontribusi rumah tangga secara proporsional dan penetapan dana otonom pribadi.
+                <div class="card p-6 sm:p-7 mt-6">
+                    <h3 class="panel-title text-lg">Simulasi Interaktif: Emotional Bank Account <span class="text-slate-400 font-semibold">(Tabungan Emosional)</span></h3>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                        Setiap interaksi positif merupakan setoran (deposit), sedangkan kritik/penghinaan adalah penarikan (withdrawal). Atur slider di bawah untuk melihat dampak rasio interaksi terhadap tingkat kesehatan relasi Anda.
                     </p>
 
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="text-[11px] font-bold text-slate-500">Pendapatan Pasangan A (Rp)</label>
-                            <input type="number" id="income-a" value="15000000" class="w-full p-2 mt-1 border border-slate-300 rounded-lg text-xs font-bold" oninput="calculateBudget()">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center mt-6">
+                        <div class="md:col-span-2 sim-tint p-5 rounded-xl border border-[#E5D9C8] space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <label for="positive-range">Setoran Positif (Pujian, Sentuhan, Apresiasi)</label>
+                                    <output id="positive-val" class="text-[#0E4B55]">15</output>
+                                </div>
+                                <input type="range" id="positive-range" min="1" max="30" value="15" class="w-full slider-teal" oninput="updateBankSimulator()">
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <label for="negative-range">Penarikan Negatif (Kritik, Defensif, Konflik)</label>
+                                    <output id="negative-val" class="text-[#9A1B2E]">2</output>
+                                </div>
+                                <input type="range" id="negative-range" min="1" max="10" value="2" class="w-full slider-crimson" oninput="updateBankSimulator()">
+                            </div>
                         </div>
-                        <div>
-                            <label class="text-[11px] font-bold text-slate-500">Pendapatan Pasangan B (Rp)</label>
-                            <input type="number" id="income-b" value="5000000" class="w-full p-2 mt-1 border border-slate-300 rounded-lg text-xs font-bold" oninput="calculateBudget()">
+
+                        <div class="card p-5 text-center space-y-2">
+                            <div class="text-xs font-bold text-slate-400 uppercase tracking-wide">Rasio Aktual Anda</div>
+                            <div id="ratio-result" aria-live="polite" class="ratio-num text-3xl c-teal">7.5 : 1</div>
+                            <div id="ratio-status" aria-live="polite" class="text-xs font-bold px-3 py-1 rounded-full inline-block bg-emerald-100 text-emerald-800">
+                                Sangat Sehat (Memenuhi Syarat Konflik)
+                            </div>
+                            <p id="ratio-desc" class="text-[11px] text-slate-500 leading-tight">
+                                Rasio di atas 5:1 memberikan perlindungan memadai saat terjadi perbedaan pendapat.
+                            </p>
                         </div>
                     </div>
+                </div>
+            </section>
 
-                    <div class="pt-3 border-t border-slate-200 space-y-2">
-                        <div class="flex justify-between text-xs font-medium">
-                            <span>Total Pendapatan Gabungan:</span>
-                            <span id="total-income" class="font-bold text-slate-800">Rp 20.000.000</span>
+            <!-- BAGIAN 3 -->
+            <section class="section reveal" id="bagian-3">
+                <div class="section-head">
+                    <p class="eyebrow">
+                        <svg class="svg-inline heart-svg" width="11" height="11" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="#9A1B2E" d="M12 21s-7.5-4.7-9.8-9C.6 8.6 2.5 5 6 5c2 0 3.3 1 4 2.3C10.7 6 12 5 14 5c3.5 0 5.4 3.6 3.8 7-2.3 4.3-9.8 9-9.8 9z"/>
+                        </svg>
+                        Bagian 3
+                    </p>
+                    <h2 class="section-title">Protokol 5 Langkah Reflective Listening &amp; Regulasi Fisiologis</h2>
+                    <p class="section-lede">
+                        Secara neurobiologis, mendengar reflektif menekan respons amigdala (fight-or-flight) dan mengaktifkan Korteks Prefrontal untuk berpikir rasional. Ikuti langkah terstruktur ini saat mengurai perbedaan pendapat.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-3 mt-9">
+                    <div class="step tint-soft rounded-xl p-4 flex flex-col gap-2">
+                        <span class="step-num">1</span>
+                        <h3 class="step-title">Ruang Tanpa Distraksi</h3>
+                        <p class="step-desc">Menyingkirkan gadget dan gangguan fisik sebelum dialog dimulai.</p>
+                    </div>
+                    <div class="step tint-soft rounded-xl p-4 flex flex-col gap-2">
+                        <span class="step-num">2</span>
+                        <h3 class="step-title">Atensi Penuh</h3>
+                        <p class="step-desc">Mendengarkan tanpa interupsi atau menyiapkan kalimat sanggahan.</p>
+                    </div>
+                    <div class="step tint-soft rounded-xl p-4 flex flex-col gap-2">
+                        <span class="step-num">3</span>
+                        <h3 class="step-title">Parafrase Reflektif</h3>
+                        <p class="step-desc">Mengulang inti pesan: &ldquo;Yang aku tangkap, kamu merasa&hellip;&rdquo;</p>
+                    </div>
+                    <div class="step tint-soft rounded-xl p-4 flex flex-col gap-2">
+                        <span class="step-num">4</span>
+                        <h3 class="step-title">Validasi Emosional</h3>
+                        <p class="step-desc">Mengakui keabsahan perasaan tanpa harus menyetujui seluruh opini.</p>
+                    </div>
+                    <div class="step tint-soft rounded-xl p-4 flex flex-col gap-2">
+                        <span class="step-num">5</span>
+                        <h3 class="step-title">Klarifikasi Terbuka</h3>
+                        <p class="step-desc">Mengajukan pertanyaan eksploratif guna mengonfirmasi pemahaman.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- BAGIAN 4 -->
+            <section class="section reveal" id="bagian-4">
+                <div class="section-head">
+                    <p class="eyebrow">
+                        <svg class="svg-inline heart-svg" width="11" height="11" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="#9A1B2E" d="M12 21s-7.5-4.7-9.8-9C.6 8.6 2.5 5 6 5c2 0 3.3 1 4 2.3C10.7 6 12 5 14 5c3.5 0 5.4 3.6 3.8 7-2.3 4.3-9.8 9-9.8 9z"/>
+                        </svg>
+                        Bagian 4
+                    </p>
+                    <h2 class="section-title">Keseimbangan Kekuasaan &amp; Transparansi Finansial Berbasis Ekuitas</h2>
+                    <p class="section-lede">
+                        Ketimpangan usia atau pendapatan berisiko memicu pola paternalistik/maternalistik yang merusak otonomi individu, terutama bila salah satu pihak di bawah usia 25 tahun (fase kematangan korteks prefrontal). Pengelolaan keuangan berbasis proporsi persentase membantu menjaga kesetaraan hak.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mt-9">
+                    <div class="card card-hover p-6 sm:p-7 space-y-5">
+                        <h3 class="panel-title text-base">Kalkulator Alokasi Finansial Proporsional</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Masukkan estimasi pendapatan bulanan kedua pihak untuk menghitung kontribusi rumah tangga secara proporsional dan penetapan dana otonom pribadi.
+                        </p>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="field-label" for="income-a">Pendapatan Pasangan A (Rp)</label>
+                                <input type="number" id="income-a" value="15000000" class="field-input mt-1" oninput="calculateBudget()">
+                            </div>
+                            <div>
+                                <label class="field-label" for="income-b">Pendapatan Pasangan B (Rp)</label>
+                                <input type="number" id="income-b" value="5000000" class="field-input mt-1" oninput="calculateBudget()">
+                            </div>
                         </div>
-                        <div class="flex justify-between text-xs font-medium">
-                            <span>Beban Rumah Tangga (Estimasi 60%):</span>
-                            <span id="household-expense" class="font-bold text-slate-800">Rp 12.000.000</span>
-                        </div>
-                        <div class="p-3 bg-white rounded-lg border border-slate-200 space-y-1 text-xs">
+                        <div class="pt-4 border-t border-[#E5D9C8] space-y-2 text-xs">
                             <div class="flex justify-between">
-                                <span>Kontribusi Pasangan A (75%):</span>
-                                <span id="contrib-a" class="font-bold text-[#0F4C5C]">Rp 9.000.000</span>
+                                <span class="text-slate-600">Total Pendapatan Gabungan:</span>
+                                <span id="total-income" class="font-bold">Rp 20.000.000</span>
                             </div>
                             <div class="flex justify-between">
-                                <span>Kontribusi Pasangan B (25%):</span>
-                                <span id="contrib-b" class="font-bold text-[#E36414]">Rp 3.000.000</span>
+                                <span class="text-slate-600">Beban Rumah Tangga (Estimasi 60%):</span>
+                                <span id="household-expense" class="font-bold">Rp 12.000.000</span>
                             </div>
+                            <div class="p-3 bg-white rounded-lg border border-[#E5D9C8] space-y-1">
+                                <div class="flex justify-between">
+                                    <span>Kontribusi Pasangan A (75%):</span>
+                                    <span id="contrib-a" class="font-bold text-[#0E4B55]">Rp 9.000.000</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Kontribusi Pasangan B (25%):</span>
+                                    <span id="contrib-b" class="font-bold text-[#E2622B]">Rp 3.000.000</span>
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-slate-500 italic mt-1 leading-snug">
+                                *Dengan sistem ini, kedua pihak berkontribusi dengan beban persentase yang sama terhadap kapasitas finansial masing-masing, menjaga rasa adil dan menghormati dana otonomi pribadi.
+                            </p>
                         </div>
-                        <p class="text-[11px] text-slate-500 italic mt-1 leading-snug">
-                            *Dengan sistem ini, kedua pihak berkontribusi dengan beban persentase yang sama terhadap kapasitas finansial masing-masing, menjaga rasa adil dan menghormati dana otonomi pribadi.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="space-y-4">
-                    <h3 class="text-base font-bold text-slate-800">Prinsip Otonomi & Institusionalisasi "Planning Talks"</h3>
-                    
-                    <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-2">
-                        <div class="text-xs font-bold text-[#0F4C5C]">1. Penjagaan Hak Veto & Otonomi Identitas</div>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            Pasangan yang lebih muda atau memiliki pendapatan lebih rendah wajib mempertahankan ruang keputusan pribadi, jejaring pertemanan mandiri, serta pengembangan pendidikan/karier tanpa kendali absolut pasangan.
-                        </p>
                     </div>
 
-                    <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-2">
-                        <div class="text-xs font-bold text-[#0F4C5C]">2. Institutionalized Planning Talks (Berkala)</div>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            Penyelenggaraan diskusi strategis berkala (triwulanan/tahunan) untuk menyelaraskan peta jalan (*roadmap*) relasi, investasi, proyeksi anak, hingga rencana pensiun guna menyinergikan horizon waktu yang berbeda.
-                        </p>
+                    <div class="space-y-4">
+                        <h3 class="panel-title text-base">Prinsip Otonomi &amp; Institusionalisasi &ldquo;Planning Talks&rdquo;</h3>
+                        <div class="tint-card">
+                            <div class="text-xs font-bold mb-1">1. Penjagaan Hak Veto &amp; Otonomi Identitas</div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Pasangan yang lebih muda atau memiliki pendapatan lebih rendah wajib mempertahankan ruang keputusan pribadi, jejaring pertemanan mandiri, serta pengembangan pendidikan/karier tanpa kendali absolut pasangan.
+                            </p>
+                        </div>
+                        <div class="tint-card">
+                            <div class="text-xs font-bold mb-1">2. Institutionalized Planning Talks (Berkala)</div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Penyelenggaraan diskusi strategis berkala (triwulanan/tahunan) untuk menyelaraskan peta jalan (<em>roadmap</em>) relasi, investasi, proyeksi anak, hingga rencana pensiun guna menyinergikan horizon waktu yang berbeda.
+                            </p>
+                        </div>
+                        <div class="tint-card">
+                            <div class="text-xs font-bold mb-1">3. Pengelolaan Transisi Perkembangan Otak (&lt;25 Tahun)</div>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Menyadari proses maturasi korteks prefrontal pada pasangan muda sehingga proses pengambilan keputusan strategis dilakukan melalui dialog pembimbingan yang setara, bukan arahan instruktif satu arah.
+                            </p>
+                        </div>
                     </div>
+                </div>
+            </section>
 
-                    <div class="p-4 bg-white rounded-xl border border-slate-200 space-y-2">
-                        <div class="text-xs font-bold text-[#0F4C5C]">3. Pengelolaan Transisi Perkembangan Otak (<25 Tahun)</div>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            Menyadari proses maturasi korteks prefrontal pada pasangan muda sehingga proses pengambilan keputusan strategis dilakukan melalui dialog pembimbingan yang setara, bukan arahan instruktif satu arah.
-                        </p>
+            <!-- BAGIAN 5 -->
+            <section class="section reveal" id="bagian-5">
+                <div class="section-head">
+                    <p class="eyebrow">
+                        <svg class="svg-inline heart-svg" width="11" height="11" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="#9A1B2E" d="M12 21s-7.5-4.7-9.8-9C.6 8.6 2.5 5 6 5c2 0 3.3 1 4 2.3C10.7 6 12 5 14 5c3.5 0 5.4 3.6 3.8 7-2.3 4.3-9.8 9-9.8 9z"/>
+                        </svg>
+                        Bagian 5
+                    </p>
+                    <h2 class="section-title">Adaptasi Keintiman Fisik &amp; Navigasi Stigma Sosio-Kultural</h2>
+                    <p class="section-lede">
+                        Perubahan fisik akibat penuaan serta tekanan norma sosial dalam masyarakat kolektif seperti Indonesia memerlukan strategi penyesuaian ekspektasi internal dan pembatasan pengaruh eksternal.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-9">
+                    <div class="tint-soft rounded-xl p-5 border border-[#E5D9C8] space-y-3">
+                        <h3 class="text-sm font-bold uppercase tracking-wider">Adaptasi Seksualitas &amp; Penuaan</h3>
+                        <ul class="space-y-3">
+                            <li class="bullet">
+                                <span class="bullet-dot dot-coral"></span>
+                                <span><strong>Dekonstruksi Keintiman:</strong> Memperluas definisi intimasi dari sekadar koitus/genital menjadi keintiman holistik (sentuhan non-seksual, kehangatan emosional, dan kedekatan spiritual).</span>
+                            </li>
+                            <li class="bullet">
+                                <span class="bullet-dot dot-coral"></span>
+                                <span><strong>Komunikasi Eksplisit Tanpa Stigma:</strong> Mendorong dialog terbuka mengenai fluktuasi libido, kecemasan performa, dan penurunan ketahanan fisik tanpa rasa malu.</span>
+                            </li>
+                            <li class="bullet">
+                                <span class="bullet-dot dot-coral"></span>
+                                <span><strong>Pengelolaan Ekspektasi:</strong> Memposisikan aktivitas intim sebagai sumber relaksasi bersama, bukan sebagai ajang pembuktian performa.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tint-soft rounded-xl p-5 border border-[#E5D9C8] space-y-3">
+                        <h3 class="text-sm font-bold uppercase tracking-wider">Navigasi Stigma Indonesia</h3>
+                        <ul class="space-y-3">
+                            <li class="bullet">
+                                <span class="bullet-dot dot-teal"></span>
+                                <span><strong>Boundary Setting Tekstual:</strong> Membangun batas yang tegas terhadap intervensi keluarga besar atau cemoohan masyarakat mengenai stereotip age gap.</span>
+                            </li>
+                            <li class="bullet">
+                                <span class="bullet-dot dot-teal"></span>
+                                <span><strong>Internal Validation Focus:</strong> Mengalihkan standar kebahagiaan dari penilaian sosial eksternal menuju mutu interaksi internal dan rasa aman pasangan.</span>
+                            </li>
+                            <li class="bullet">
+                                <span class="bullet-dot dot-teal"></span>
+                                <span><strong>Dukungan Selektif:</strong> Memilih jejaring komunitas yang inklusif serta memanfaatkan konseling profesional jika tekanan stigma mengganggu kesehatan mental.</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 card-shadow space-y-6">
-            <div class="border-b border-slate-100 pb-4">
-                <span class="text-xs font-bold text-[#E36414] uppercase tracking-wider">Bagian 5</span>
-                <h2 class="text-2xl font-bold text-[#0F4C5C] mt-1">Adaptasi Keintiman Fisik & Navigasi Stigma Sosio-Kultural</h2>
-                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                    Perubahan fisik akibat penuaan serta tekanan norma sosial dalam masyarakat kolektif seperti Indonesia memerlukan strategi penyesuaian ekspektasi internal dan pembatasan pengaruh eksternal.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="p-5 bg-[#FDFBF7] rounded-xl border border-slate-200 space-y-3">
-                    <h3 class="text-sm font-bold text-[#0F4C5C] uppercase tracking-wider">Adaptasi Seksualitas & Penuaan</h3>
-                    <ul class="space-y-2 text-xs text-slate-600 leading-relaxed">
-                        <li class="flex items-start gap-2">
-                            <span class="text-[#E36414] font-bold">•</span>
-                            <span><strong>Dekonstruksi Keintiman:</strong> Memperluas definisi intimasi dari sekadar koitus/genital menjadi keintiman holistik (sentuhan non-seksual, kehangatan emosional, dan kedekatan spiritual).</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-[#E36414] font-bold">•</span>
-                            <span><strong>Komunikasi Eksplisit Tanpa Stigma:</strong> Mendorong dialog terbuka mengenai fluktuasi libido, kecemasan performa, dan penurunan ketahanan fisik tanpa rasa malu.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-[#E36414] font-bold">•</span>
-                            <span><strong>Pengelolaan Ekspektasi:</strong> Memposisikan aktivitas intim sebagai sumber relaksasi bersama, bukan sebagai ajang pembuktian performa.</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="p-5 bg-[#FDFBF7] rounded-xl border border-slate-200 space-y-3">
-                    <h3 class="text-sm font-bold text-[#0F4C5C] uppercase tracking-wider">Navigasi Stigma Indonesia</h3>
-                    <ul class="space-y-2 text-xs text-slate-600 leading-relaxed">
-                        <li class="flex items-start gap-2">
-                            <span class="text-[#0F4C5C] font-bold">•</span>
-                            <span><strong>Boundary Setting Tekstual:</strong> Membangun batas yang tegas terhadap intervensi keluarga besar atau cemoohan masyarakat mengenai stereotip age gap.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-[#0F4C5C] font-bold">•</span>
-                            <span><strong>Internal Validation Focus:</strong> Mengalihkan standar kebahagiaan dari penilaian sosial eksternal menuju mutu interaksi internal dan rasa aman pasangan.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-[#0F4C5C] font-bold">•</span>
-                            <span><strong>Dukungan Selektif:</strong> Memilih jejaring komunitas yang inklusif serta memanfaatkan konseling profesional jika tekanan stigma mengganggu kesehatan mental.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
+        </div>
     </main>
 
     <noscript>
@@ -394,12 +596,14 @@
         </div>
     </noscript>
 
-    <footer class="max-w-6xl mx-auto px-4 sm:px-6 mt-12 text-center text-xs text-slate-400 space-y-2">
-        <p>Disintesis dari Riset Empiris Age-Gap Dynamics, Kerangka Kerja Klinik Gottman Therapy, dan Studi Sosio-Kultural Indonesia.</p>
-        <p>&copy; SPA Infografis Keharmonisan Pasangan. Didesain untuk keterpahaman data mutakhir.</p>
-        <div class="flex justify-center gap-4">
-            <a href="sumber-riset.pdf" class="underline hover:text-slate-500" target="_blank" rel="noopener">Unduh Sumber Riset (PDF)</a>
-            <a href="assets/panduan-lengkap.png" class="underline hover:text-slate-500" target="_blank" rel="noopener">Lihat Panduan Lengkap (Gambar)</a>
+    <footer class="footer">
+        <div class="max-w-6xl mx-auto px-5 sm:px-8 text-center space-y-3">
+            <p class="footer-note">Disintesis dari Riset Empiris Age-Gap Dynamics, Kerangka Kerja Klinik Gottman Therapy, dan Studi Sosio-Kultural Indonesia.</p>
+            <p class="footer-note">&copy; SPA Infografis Keharmonisan Pasangan. Didesain untuk keterpahaman data mutakhir.</p>
+            <div class="footer-links flex justify-center gap-5 pt-1">
+                <a href="sumber-riset.pdf" target="_blank" rel="noopener">Unduh Sumber Riset (PDF)</a>
+                <a href="assets/panduan-lengkap.png" target="_blank" rel="noopener">Panduan Lengkap (Gambar)</a>
+            </div>
         </div>
     </footer>
 
@@ -447,17 +651,17 @@
             const data = horsemanData[key];
             const display = document.getElementById('horseman-display');
             display.innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-2 border-b md:border-b-0 md:border-r border-slate-200 pb-4 md:pb-0 md:pr-6">
-                        <div class="text-xs font-bold text-[#9A031E] uppercase tracking-wider">Perilaku Destruktif</div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="panel-destructive rounded-xl p-5 space-y-2">
+                        <div class="panel-tag text-[#9A1B2E]">Perilaku Destruktif</div>
                         <h4 class="text-lg font-bold text-slate-800">${data.title}</h4>
                         <p class="text-xs text-slate-600 leading-relaxed">${data.horsemanDesc}</p>
                     </div>
-                    <div class="space-y-2">
-                        <div class="text-xs font-bold text-[#0F4C5C] uppercase tracking-wider">Solusi Klinis Gottman</div>
-                        <h4 class="text-lg font-bold text-[#0F4C5C]">${data.antidoteTitle}</h4>
+                    <div class="panel-antidote rounded-xl p-5 space-y-2">
+                        <div class="panel-tag text-[#0E4B55]">Solusi Klinis Gottman</div>
+                        <h4 class="text-lg font-bold text-[#0E4B55]">${data.antidoteTitle}</h4>
                         <p class="text-xs text-slate-600 leading-relaxed">${data.antidoteDesc}</p>
-                        <div class="p-3 bg-white rounded-lg border border-slate-200 text-xs text-slate-700 mt-2">${data.example}</div>
+                        <div class="p-3 bg-white rounded-lg border border-[#E5D9C8] text-xs text-slate-700 mt-2">${data.example}</div>
                     </div>
                 </div>
             `;
@@ -522,6 +726,19 @@
             updateBankSimulator();
             calculateBudget();
 
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const revealEls = document.querySelectorAll('.reveal');
+            if (reduceMotion || !('IntersectionObserver' in window)) {
+                revealEls.forEach(el => el.classList.add('in-view'));
+            } else {
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+                    });
+                }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+                revealEls.forEach(el => io.observe(el));
+            }
+
             const divorceCtx = document.getElementById('divorceRiskChart').getContext('2d');
             new Chart(divorceCtx, {
                 type: 'bar',
@@ -535,8 +752,9 @@
                     datasets: [{
                         label: 'Peningkatan Risiko Perceraian Relatif (%)',
                         data: [0, 18, 39, 98],
-                        backgroundColor: ['#0F4C5C', '#FB8B24', '#E36414', '#9A031E'],
-                        borderRadius: 6
+                        backgroundColor: ['#0E4B55', '#F2A33C', '#E2622B', '#9A1B2E'],
+                        borderRadius: 6,
+                        maxBarThickness: 64
                     }]
                 },
                 options: {
@@ -545,6 +763,11 @@
                     plugins: {
                         legend: { display: false },
                         tooltip: {
+                            backgroundColor: '#1C2B29',
+                            titleColor: '#FFFFFF',
+                            bodyColor: 'rgba(255,255,255,0.85)',
+                            padding: 12,
+                            cornerRadius: 8,
                             callbacks: {
                                 title: function(tooltipItems) {
                                     const item = tooltipItems[0];
@@ -557,8 +780,20 @@
                     scales: {
                         y: {
                             beginAtZero: true,
+                            grid: { color: 'rgba(28, 43, 41, 0.08)' },
+                            border: { display: false },
                             ticks: {
-                                callback: function(value) { return '+' + value + '%'; }
+                                callback: function(value) { return '+' + value + '%'; },
+                                color: '#64736F',
+                                font: { family: 'Plus Jakarta Sans', size: 11 }
+                            }
+                        },
+                        x: {
+                            grid: { display: false },
+                            border: { display: false },
+                            ticks: {
+                                color: '#64736F',
+                                font: { family: 'Plus Jakarta Sans', size: 11 }
                             }
                         }
                     }
@@ -580,18 +815,28 @@
                         {
                             label: 'Pasangan Sebaya (0-5 Thn)',
                             data: [85, 83, 82, 80, 81],
-                            borderColor: '#0F4C5C',
-                            backgroundColor: '#0F4C5C',
-                            tension: 0.3,
-                            borderWidth: 3
+                            borderColor: '#0E4B55',
+                            backgroundColor: '#0E4B55',
+                            tension: 0.35,
+                            borderWidth: 3,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            pointBackgroundColor: '#0E4B55',
+                            pointBorderColor: '#FAF5EC',
+                            pointBorderWidth: 2
                         },
                         {
                             label: 'Beda Usia Besar (>=10 Thn)',
                             data: [92, 88, 72, 64, 60],
-                            borderColor: '#E36414',
-                            backgroundColor: '#E36414',
-                            tension: 0.3,
-                            borderWidth: 3
+                            borderColor: '#E2622B',
+                            backgroundColor: '#E2622B',
+                            tension: 0.35,
+                            borderWidth: 3,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            pointBackgroundColor: '#E2622B',
+                            pointBorderColor: '#FAF5EC',
+                            pointBorderWidth: 2
                         }
                     ]
                 },
@@ -599,8 +844,23 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom' },
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#1C2B29',
+                                usePointStyle: true,
+                                boxWidth: 8,
+                                boxHeight: 8,
+                                padding: 16,
+                                font: { family: 'Plus Jakarta Sans', size: 11, weight: 600 }
+                            }
+                        },
                         tooltip: {
+                            backgroundColor: '#1C2B29',
+                            titleColor: '#FFFFFF',
+                            bodyColor: 'rgba(255,255,255,0.85)',
+                            padding: 12,
+                            cornerRadius: 8,
                             callbacks: {
                                 title: function(tooltipItems) {
                                     const item = tooltipItems[0];
@@ -614,8 +874,20 @@
                         y: {
                             min: 40,
                             max: 100,
+                            grid: { color: 'rgba(28, 43, 41, 0.08)' },
+                            border: { display: false },
                             ticks: {
-                                callback: function(value) { return value + ' Pts'; }
+                                callback: function(value) { return value + ' Pts'; },
+                                color: '#64736F',
+                                font: { family: 'Plus Jakarta Sans', size: 11 }
+                            }
+                        },
+                        x: {
+                            grid: { display: false },
+                            border: { display: false },
+                            ticks: {
+                                color: '#64736F',
+                                font: { family: 'Plus Jakarta Sans', size: 11 }
                             }
                         }
                     }
