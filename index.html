@@ -123,6 +123,13 @@
 
         /* ---- Hero ---- */
         .hero { text-align: center; }
+        .hero-grid { display: grid; gap: 2.2rem; }
+        @media (min-width: 1024px) {
+            .hero-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: center; text-align: left; }
+            .hero-lede { margin: 1.4rem 0 0; }
+            .chip-row { justify-content: flex-start; }
+            .toc { margin: 0; max-width: none; }
+        }
         .hero-eyebrow {
             display: inline-flex; align-items: center; gap: .5rem;
             font-size: .72rem; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--coral);
@@ -145,7 +152,7 @@
         .chip-row { margin-top: 1.6rem; display: flex; justify-content: center; gap: .6rem; flex-wrap: wrap; }
 
         /* ---- Daftar isi ---- */
-        .toc { max-width: 44rem; margin: 1.7rem auto 0; text-align: left; padding: 1.1rem 1.25rem .9rem; }
+        .toc { max-width: 44rem; width: 100%; margin: 0 auto; text-align: left; padding: 1.1rem 1.25rem .9rem; }
         .toc-label { font-size: .68rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: .55rem; }
         .toc-row {
             display: flex; align-items: center; gap: .9rem;
@@ -332,6 +339,8 @@
 
             <!-- HERO -->
             <section class="hero">
+                <div class="hero-grid">
+                <div class="hero-main">
                 <p class="hero-eyebrow reveal">
                     <svg class="svg-inline heart-svg" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill="#9A1B2E" d="M12 21s-7.5-4.7-9.8-9C.6 8.6 2.5 5 6 5c2 0 3.3 1 4 2.3C10.7 6 12 5 14 5c3.5 0 5.4 3.6 3.8 7-2.3 4.3-9.8 9-9.8 9z"/>
@@ -346,8 +355,9 @@
                     <span class="chip"><b>5 : 1</b> Rasio minimal interaksi positif saat konflik</span>
                     <span class="chip">Berdasarkan studi longitudinal &amp; terapi pasangan</span>
                 </div>
+                </div>
 
-                <nav class="toc card reveal d3" aria-label="Daftar isi panduan">
+                <nav class="toc card reveal d2" aria-label="Daftar isi panduan">
                     <div class="toc-label">Daftar isi · 5 bagian</div>
                     <a class="toc-row" href="#bagian-1">
                         <span class="toc-num">01</span>
@@ -390,6 +400,7 @@
                         <svg class="toc-arrow svg-inline" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                     </a>
                 </nav>
+                </div>
 
                 <figure class="poster reveal d2">
                     <div class="poster-frame">
